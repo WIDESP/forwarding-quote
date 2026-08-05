@@ -1,20 +1,16 @@
-# 포워딩 견적문의 v4 — Vercel + Supabase 테스트 배포
+# 포워딩 견적문의 — Vercel + Supabase 테스트 배포
 
-## Supabase
-1. 무료 Supabase 프로젝트 생성
-2. SQL Editor에서 `supabase.sql` 전체 실행
-3. Authentication > Users에서 관리자 이메일/비밀번호 생성
-4. Project Settings > API Keys에서 **Publishable key** 확인 (`sb_publishable_...`)
-5. `sb_secret_...` 키는 사용하지 않습니다.
+## 이번 수정
+Vercel 최신 배포 환경에서 `nodejs20.x`를 명시하면 Function Runtime 오류가 발생할 수 있어 `vercel.json`에서 고정 runtime 설정을 제거했습니다. Vercel이 API 함수의 Node.js runtime을 자동 선택합니다.
 
-## Vercel
-GitHub에 이 폴더 전체를 올린 뒤 Vercel에서 Import합니다.
+## GitHub
+이 폴더의 내용을 기존 `forwarding-quote` 저장소에 업로드하고 Commit changes 하세요.
+특히 루트의 `vercel.json`을 새 파일로 교체해야 합니다.
 
-Environment Variables:
-- `SUPABASE_URL` = Supabase Project URL
-- `SUPABASE_PUBLISHABLE_KEY` = Supabase Publishable key (`sb_publishable_...`)
+## Vercel 환경변수
+- `SUPABASE_URL` = `https://ltoizahxjupwdcwdaibp.supabase.co`
+- `SUPABASE_PUBLISHABLE_KEY` = Supabase API Keys의 `sb_publishable_...`
 
-저장 후 Redeploy합니다.
-
-고객: `https://발급주소.vercel.app/`
-관리자: `https://발급주소.vercel.app/admin`
+## 접속
+- 고객: `/`
+- 관리자: `/admin`

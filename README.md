@@ -1,1 +1,1 @@
-포워딩 견적문의 실제 테스트용 Vercel + Supabase 프로젝트입니다. 최신 Supabase Publishable Key 방식으로 수정되었습니다.
+포워딩 견적문의 실제 테스트용 Vercel + Supabase 프로젝트입니다. 배포 방법은 DEPLOY-KO.md를 참고하세요.
