@@ -204,65 +204,101 @@
   </form>
 </div>
 
-<script>
-// 1. 주요 포트 데이터 및 자동완성
-const PORTS = [
-  { code: 'KRPUS', name: 'Busan', country: 'Korea' },
-  { code: 'KRINC', name: 'Incheon', country: 'Korea' },
-  { code: 'USLAX', name: 'Los Angeles', country: 'USA' },
-  { code: 'USLGB', name: 'Long Beach', country: 'USA' },
-  { code: 'USNYC', name: 'New York', country: 'USA' },
-  { code: 'CNSHA', name: 'Shanghai', country: 'China' }
-];
+<!-- EmailJS SDK 연동 -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
-function setupAutocomplete(inputId, listId) {
-  const input = document.getElementById(inputId);
-  const list = document.getElementById(listId);
+<script type="text/javascript">
+  // 1. EmailJS 초기화 (전달해주신 Public Key 적용)
+  (function() {
+    emailjs.init("AZNplwsjRX-VEjTqg");
+  })();
 
-  input.addEventListener('input', function() {
-    const val = this.value.toUpperCase();
-    list.innerHTML = '';
-    if (!val) return;
+  // 2. 주요 포트 데이터 및 자동완성
+  const PORTS = [
+    { code: 'KRPUS', name: 'Busan', country: 'Korea' },
+    { code: 'KRINC', name: 'Incheon', country: 'Korea' },
+    { code: 'USLAX', name: 'Los Angeles', country: 'USA' },
+    { code: 'USLGB', name: 'Long Beach', country: 'USA' },
+    { code: 'USNYC', name: 'New York', country: 'USA' },
+    { code: 'CNSHA', name: 'Shanghai', country: 'China' }
+  ];
 
-    const matches = PORTS.filter(p => p.code.includes(val) || p.name.toUpperCase().includes(val));
-    matches.forEach(p => {
-      const item = document.createElement('div');
-      item.innerHTML = `<b>${p.code}</b> - ${p.name}, ${p.country}`;
-      item.onclick = function() {
-        input.value = `${p.code} (${p.name}, ${p.country})`;
-        list.innerHTML = '';
-      };
-      list.appendChild(item);
+  function setupAutocomplete(inputId, listId) {
+    const input = document.getElementById(inputId);
+    const list = document.getElementById(listId);
+
+    input.addEventListener('input', function() {
+      const val = this.value.toUpperCase();
+      list.innerHTML = '';
+      if (!val) return;
+
+      const matches = PORTS.filter(p => p.code.includes(val) || p.name.toUpperCase().includes(val));
+      matches.forEach(p => {
+        const item = document.createElement('div');
+        item.innerHTML = `<b>${p.code}</b> - ${p.name}, ${p.country}`;
+        item.onclick = function() {
+          input.value = `${p.code} (${p.name}, ${p.country})`;
+          list.innerHTML = '';
+        };
+        list.appendChild(item);
+      });
     });
-  });
 
-  document.addEventListener('click', (e) => { if (e.target !== input) list.innerHTML = ''; });
-}
+    document.addEventListener('click', (e) => { if (e.target !== input) list.innerHTML = ''; });
+  }
 
-setupAutocomplete('origin', 'origin-list');
-setupAutocomplete('dest', 'dest-list');
+  setupAutocomplete('origin', 'origin-list');
+  setupAutocomplete('dest', 'dest-list');
 
-// 2. CBM 실시간 계산 logic
-function calcCbm() {
-  const w = Number(document.getElementById('dim_w').value) || 0;
-  const l = Number(document.getElementById('dim_l').value) || 0;
-  const h = Number(document.getElementById('dim_h').value) || 0;
-  const q = Number(document.getElementById('dim_q').value) || 1;
-  const cbm = (w * l * h * q) / 1000000;
-  document.getElementById('cbm').value = cbm > 0 ? cbm.toFixed(3) : '';
-}
+  // 3. CBM 실시간 계산 logic
+  function calcCbm() {
+    const w = Number(document.getElementById('dim_w').value) || 0;
+    const l = Number(document.getElementById('dim_l').value) || 0;
+    const h = Number(document.getElementById('dim_h').value) || 0;
+    const q = Number(document.getElementById('dim_q').value) || 1;
+    const cbm = (w * l * h * q) / 1000000;
+    document.getElementById('cbm').value = cbm > 0 ? cbm.toFixed(3) : '';
+  }
 
-// 3. 운송 방식에 따른 UI 전환
-function toggleMode() {
-  const isFcl = document.getElementById('m_fcl').checked;
-  document.getElementById('fcl-spec').style.display = isFcl ? 'flex' : 'none';
-  document.getElementById('lcl-spec').style.display = isFcl ? 'none' : 'block';
-}
+  // 4. 운송 방식에 따른 UI 전환
+  function toggleMode() {
+    const isFcl = document.getElementById('m_fcl').checked;
+    document.getElementById('fcl-spec').style.display = isFcl ? 'flex' : 'none';
+    document.getElementById('lcl-spec').style.display = isFcl ? 'none' : 'block';
+  }
 
-// 4. 견적 문의 제출
-async function submitQuote() {
-  alert('견적 문의가 정상 접수되었습니다!');
-}
+  // 5. 견적 문의 제출 및 EmailJS 이메일 발송
+  async function submitQuote() {
+    const selectedMode = document.querySelector('input[name="mode"]:checked').value;
+
+    const templateParams = {
+      company: document.getElementById('company').value,
+      name: document.getElementById('name').value,
+      phone: document.getElementById('phone').value,
+      email: document.getElementById('email').value,
+      mode: selectedMode,
+      origin: document.getElementById('origin').value,
+      dest: document.getElementById('dest').value,
+      inc: document.getElementById('inc').value,
+      cargo: document.getElementById('cargo').value,
+      fcl_type: document.getElementById('fcl_type') ? document.getElementById('fcl_type').value : 'N/A',
+      cbm: document.getElementById('cbm') ? document.getElementById('cbm').value : '0',
+      weight: document.getElementById('weight') ? document.getElementById('weight').value : '0',
+      memo: document.getElementById('memo').value || '없음'
+    };
+
+    try {
+      // 전달해주신 Service ID 및 Template ID 적용
+      await emailjs.send('service_0941k49', 'template_07n0vdn', templateParams);
+
+      alert('견적 문의가 정상 접수되었으며, 담당자 메일로 보냈습니다.');
+      location.reload(); // 성공 시 폼 초기화
+      
+    } catch (error) {
+      console.error('이메일 발송 실패:', error);
+      alert('견적 접수 중 오류가 발생했습니다. 키값을 다시 확인해주세요.');
+    }
+  }
 </script>
 </body>
 </html>
