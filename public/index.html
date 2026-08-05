@@ -208,7 +208,7 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
 <script type="text/javascript">
-  // 1. EmailJS 초기화 (전달해주신 Public Key 적용)
+  // 1. EmailJS 초기화
   (function() {
     emailjs.init("AZNplwsjRX-VEjTqg");
   })();
@@ -270,6 +270,10 @@
   // 5. 견적 문의 제출 및 EmailJS 이메일 발송
   async function submitQuote() {
     const selectedMode = document.querySelector('input[name="mode"]:checked').value;
+    const isFcl = document.getElementById('m_fcl').checked;
+
+    // FCL이 아닐 때(LCL/항공)는 '해당없음'으로 표시되도록 조치
+    const fclTypeValue = isFcl ? document.getElementById('fcl_type').value : '해당없음(LCL/Air)';
 
     const templateParams = {
       company: document.getElementById('company').value,
@@ -281,22 +285,21 @@
       dest: document.getElementById('dest').value,
       inc: document.getElementById('inc').value,
       cargo: document.getElementById('cargo').value,
-      fcl_type: document.getElementById('fcl_type') ? document.getElementById('fcl_type').value : 'N/A',
-      cbm: document.getElementById('cbm') ? document.getElementById('cbm').value : '0',
-      weight: document.getElementById('weight') ? document.getElementById('weight').value : '0',
+      fcl_type: fclTypeValue,
+      cbm: document.getElementById('cbm') ? (document.getElementById('cbm').value || '0') : '0',
+      weight: document.getElementById('weight') ? (document.getElementById('weight').value || '0') : '0',
       memo: document.getElementById('memo').value || '없음'
     };
 
     try {
-      // 전달해주신 Service ID 및 Template ID 적용
       await emailjs.send('service_0941k49', 'template_07n0vdn', templateParams);
 
-      alert('견적 문의가 정상 접수되었으며, 담당자 메일로 보냈습니다.');
-      location.reload(); // 성공 시 폼 초기화
+      alert('견적 문의가 정상 접수되었습니다.');
+      location.reload();
       
     } catch (error) {
       console.error('이메일 발송 실패:', error);
-      alert('견적 접수 중 오류가 발생했습니다. 키값을 다시 확인해주세요.');
+      alert('견적 접수 중 오류가 발생했습니다.');
     }
   }
 </script>
