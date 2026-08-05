@@ -1,4 +1,312 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>포워딩 운송 견적문의 | 와이드해운</title><style>
-*{box-sizing:border-box}body{margin:0;background:#f3f6fa;color:#172033;font-family:Arial,"Noto Sans KR",sans-serif}.site{max-width:1180px;margin:0 auto;background:#fff;min-height:100vh;box-shadow:0 0 0 1px #dbe2ea}.header{height:86px;display:flex;align-items:center;justify-content:space-between;padding:0 38px;border-bottom:1px solid #e1e6ed}.logo{display:block;width:250px;height:auto}.nav{display:flex;gap:34px;align-items:center}.nav a{font-size:14px;font-weight:800;color:#344054;text-decoration:none;padding:32px 0 27px;border-bottom:3px solid transparent}.nav a.active{color:#123b78;border-bottom-color:#123b78}.hero{position:relative;overflow:hidden;background:#071b43;color:#fff;min-height:245px;padding:44px 50px;display:flex;align-items:center}.hero h1{font-size:34px;letter-spacing:-1.5px;margin:0 0 14px}.hero p{margin:0;font-size:16px;line-height:1.75;color:#e9eef8}.hero-art{position:absolute;right:0;bottom:0;width:440px;height:190px;object-fit:cover;object-position:center;opacity:.9}.content{padding:20px 22px 60px;background:linear-gradient(#f7f9fc,#f3f6fa)}.panel{background:#fff;border:1px solid #e1e7ef;border-radius:16px;padding:26px;margin-top:14px;box-shadow:0 4px 16px rgba(16,38,67,.04)}h2{font-size:22px;margin:0 0 22px;color:#102b56}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px 22px}.full{grid-column:1/-1}label{display:block;font-size:13px;font-weight:800;color:#344054;margin-bottom:7px}input,select,textarea{width:100%;padding:13px 14px;border:1px solid #d4dce7;border-radius:8px;background:#fff;color:#172033;font-size:14px;outline:none}input:focus,select:focus,textarea:focus{border-color:#1e5aa8;box-shadow:0 0 0 3px rgba(30,90,168,.08)}textarea{resize:vertical}.notice{background:#f1f6fd;padding:14px 16px;border-radius:9px;color:#31518f;font-size:13px;line-height:1.6}.agree{margin-top:14px!important;font-weight:500!important;display:flex;align-items:center;gap:8px}.agree input{width:auto}.row{display:flex;justify-content:flex-end;margin-top:20px}.btn{border:0;border-radius:8px;padding:13px 24px;font-weight:900;cursor:pointer;font-size:14px}.primary{background:#123b78;color:#fff}.primary:hover{background:#0c2d5d}.success{text-align:center;padding:50px}.code{font-size:25px;color:#123b78;font-weight:900;margin:12px}@media(max-width:800px){.header{height:auto;padding:18px 20px;display:block}.logo{width:210px;margin-bottom:12px}.nav{gap:18px;overflow:auto}.nav a{padding:8px 0;border-bottom-width:2px;white-space:nowrap}.hero{padding:34px 26px;min-height:210px}.hero h1{font-size:28px}.hero-art{right:-70px;opacity:.45;width:440px;height:180px}.content{padding:12px}.grid{grid-template-columns:1fr}.full{grid-column:auto}.panel{padding:22px}.site{width:100%}}
-</style></head><body><div class="site"><header class="header"><img class="logo" src="/logo.png" alt="와이드해운 로고"><nav class="nav"><a href="#form" class="active">운송 견적문의</a></nav></header><main id="form"><section class="hero"><div><h1>포워딩 운송 견적문의</h1><p>운송 정보를 입력해 주세요.<br>담당자가 확인 후 견적을 안내드립니다.</p></div><img class="hero-art" src="/hero-logistics.png" alt="해상·항공·육상 물류 일러스트"></section><div class="content"><section class="panel"><h2>고객 정보</h2><div class="grid"><div><label>회사명 *</label><input id="company" placeholder="회사명을 입력하세요"></div><div><label>담당자명 *</label><input id="name" placeholder="담당자명을 입력하세요"></div><div><label>연락처 *</label><input id="phone" placeholder="연락처를 입력하세요"></div><div><label>이메일 *</label><input id="email" type="email" placeholder="이메일을 입력하세요"></div></div></section><section class="panel"><h2>운송 정보</h2><div class="grid"><div><label>출발지 *</label><input id="origin" placeholder="BUSAN"></div><div><label>도착지 *</label><input id="dest" placeholder="LOS ANGELES"></div><div><label>운송</label><select id="mode"><option>해상</option><option>항공</option></select></div><div><label>서비스</label><select id="service"><option>FCL</option><option>LCL</option><option>특송</option></select></div><div><label>화물</label><input id="cargo" placeholder="화물 종류"></div><div><label>수량</label><input id="qty" placeholder="수량"></div><div><label>중량(kg)</label><input id="weight" placeholder="중량"></div><div><label>CBM</label><input id="cbm" placeholder="CBM"></div><div><label>인코텀즈</label><select id="inc"><option>FOB</option><option>CIF</option><option>EXW</option><option>DDP</option><option>FCA</option></select></div><div><label>희망 출항일</label><input id="etd" type="date"></div><div class="full"><label>요청사항</label><textarea id="memo" rows="5" placeholder="추가 요청사항을 입력해주세요."></textarea></div></div></section><section class="panel"><h2>개인정보 수집 및 이용</h2><div class="notice">견적문의 접수 및 답변을 위해 입력하신 정보를 이용합니다. 실제 운영 전 개인정보 처리방침과 보관기간을 회사 정책에 맞게 확정하세요.</div><label class="agree"><input id="agree" type="checkbox"> 개인정보 수집 및 이용에 동의합니다. *</label><div class="row"><button class="btn primary" onclick="submitQuote()">견적문의 접수</button></div></section></div></main><section id="done" class="panel success" style="display:none"><div style="font-size:40px">✓</div><h2>문의가 접수되었습니다.</h2><div id="code" class="code"></div><p>담당자가 확인 후 연락드리겠습니다.</p></section></div><script>
-let cfg;async function getCfg(){try{const r=await fetch('/api/config');if(!r.ok)throw new Error('환경설정 API 오류: HTTP '+r.status);cfg=await r.json();}catch(err){console.error('환경설정 불러오기 실패:',err);cfg=null}}async function submitQuote(){const ids=['company','name','phone','email','origin','dest'];if(ids.some(id=>!document.getElementById(id).value.trim()))return alert('필수 항목을 입력해주세요.');if(!document.getElementById('agree').checked)return alert('개인정보 수집 및 이용에 동의해주세요.');if(!cfg||!cfg.supabaseUrl||!cfg.supabasePublishableKey)return alert('Supabase 연결 설정을 확인해주세요. 잠시 후 다시 시도해주세요.');const payload={company:company.value,name:name.value,phone:phone.value,email:email.value,origin:origin.value,dest:dest.value,mode:mode.value,service:service.value,cargo:cargo.value,qty:qty.value,weight:weight.value,cbm:cbm.value,inc:inc.value,etd:etd.value||null,memo:memo.value,status:'견적작성'};try{const r=await fetch(cfg.supabaseUrl+'/rest/v1/quote_inquiries',{method:'POST',headers:{'Content-Type':'application/json','apikey':cfg.supabasePublishableKey,'Prefer':'return=minimal'},body:JSON.stringify(payload)});const raw=await r.text();let result={};try{result=raw?JSON.parse(raw):{}}catch(e){result={message:raw}}if(!r.ok){console.error('견적문의 접수 실패:',r.status,result);const detail=result.message||result.error_description||result.error||raw||('HTTP '+r.status);return alert('접수 중 오류가 발생했습니다.\n['+r.status+'] '+detail)}document.getElementById('form').style.display='none';document.getElementById('done').style.display='block';document.getElementById('code').textContent='접수 완료'}catch(err){console.error('견적문의 네트워크 오류:',err);alert('서버에 연결하지 못했습니다.\n'+(err.message||err))}}getCfg();</script></body></html>
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>포워딩 운송 견적문의 | 와이드해운</title>
+<link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<style>
+  :root {
+    --primary: #0F4C81;
+    --primary-hover: #0B3B66;
+    --bg-gray: #F8FAFC;
+    --border: #CBD5E1;
+    --text-main: #0F172A;
+    --text-sub: #64748B;
+  }
+  * { box-sizing: border-box; font-family: "Pretendard", -apple-system, sans-serif; }
+  body { margin: 0; background: var(--bg-gray); color: var(--text-main); }
+  
+  .container { max-width: 860px; margin: 40px auto; padding: 0 20px; }
+  .card { background: #fff; border-radius: 16px; border: 1px solid #E2E8F0; box-shadow: 0 10px 30px rgba(0,0,0,0.04); padding: 36px; margin-bottom: 24px; }
+  
+  h1 { font-size: 24px; font-weight: 700; color: var(--text-main); margin: 0 0 8px; }
+  p.sub { color: var(--text-sub); font-size: 14px; margin: 0 0 28px; }
+  
+  /* 운송 수단 탭 */
+  .segment-control { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 24px; }
+  .segment-control input { display: none; }
+  .segment-control label {
+    text-align: center; padding: 14px; border: 1px solid var(--border); border-radius: 10px;
+    cursor: pointer; font-weight: 600; color: var(--text-sub); transition: all 0.2s;
+  }
+  .segment-control input:checked + label {
+    border-color: var(--primary); background: #EFF6FF; color: var(--primary); font-weight: 700;
+  }
+
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .full { grid-column: 1 / -1; }
+
+  label { display: block; font-size: 13px; font-weight: 700; color: #334155; margin-bottom: 6px; }
+  input, select, textarea {
+    width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: 8px;
+    font-size: 14px; color: var(--text-main); background: #fff; outline: none; transition: border 0.2s;
+  }
+  input:focus, select:focus, textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(15,76,129,0.1); }
+  
+  /* 포트 자동완성 드롭다운 */
+  .autocomplete-wrapper { position: relative; }
+  .autocomplete-items {
+    position: absolute; border: 1px solid var(--border); border-top: none; z-index: 99;
+    top: 100%; left: 0; right: 0; background-color: #fff; border-radius: 0 0 8px 8px;
+    max-height: 180px; overflow-y: auto; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .autocomplete-items div { padding: 10px 14px; cursor: pointer; font-size: 13px; border-bottom: 1px solid #F1F5F9; }
+  .autocomplete-items div:hover { background-color: #F1F5F9; color: var(--primary); font-weight: 600; }
+
+  /* CBM 계산 버튼 & 모달 */
+  .cbm-input-group { display: flex; gap: 8px; }
+  .btn-sm { background: #E2E8F0; color: #334155; border: 0; border-radius: 8px; padding: 0 14px; font-size: 13px; font-weight: 700; cursor: pointer; white-space: nowrap; }
+  .btn-sm:hover { background: #CBD5E1; }
+  
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center; }
+  .modal-overlay.active { display: flex; }
+  .modal-box { background: #fff; padding: 28px; border-radius: 16px; width: 100%; max-width: 440px; }
+
+  .btn-submit {
+    width: 100%; background: var(--primary); color: #fff; border: 0; padding: 16px;
+    border-radius: 10px; font-size: 16px; font-weight: 700; cursor: pointer; transition: background 0.2s; margin-top: 10px;
+  }
+  .btn-submit:hover { background: var(--primary-hover); }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div style="text-align: center; margin-bottom: 24px;">
+    <img src="/logo.png" alt="와이드해운" style="height: 42px;">
+  </div>
+
+  <form id="quoteForm" class="card" onsubmit="handleFormSubmit(event)">
+    <h1>국제운송 견적 문의</h1>
+    <p class="sub">운송 정보를 입력해주시면 담당자가 빠른 시일 내 견적서를 발송해 드립니다.</p>
+
+    <!-- 1. 운송 모드 -->
+    <label>운송 수단 선택 *</label>
+    <div class="segment-control">
+      <input type="radio" id="m_fcl" name="mode" value="해상 FCL" checked onchange="toggleCargoFields()">
+      <label for="m_fcl">🚢 해상 FCL</label>
+      
+      <input type="radio" id="m_lcl" name="mode" value="해상 LCL" onchange="toggleCargoFields()">
+      <label for="m_lcl">📦 해상 LCL</label>
+      
+      <input type="radio" id="m_air" name="mode" value="항공 운송" onchange="toggleCargoFields()">
+      <label for="m_air">✈️ 항공 운송</label>
+    </div>
+
+    <!-- 2. 구간 및 무역조건 -->
+    <div class="grid">
+      <div class="autocomplete-wrapper">
+        <label>출발지 (Origin) *</label>
+        <input id="origin" placeholder="포트명 또는 UN/LOCODE (예: BUSAN)" autocomplete="off" required>
+        <div id="origin-list" class="autocomplete-items"></div>
+      </div>
+      <div class="autocomplete-wrapper">
+        <label>도착지 (Destination) *</label>
+        <input id="dest" placeholder="포트명 또는 UN/LOCODE (예: LOS ANGELES)" autocomplete="off" required>
+        <div id="dest-list" class="autocomplete-items"></div>
+      </div>
+      <div>
+        <label>인코텀즈 (Incoterms) *</label>
+        <select id="inc">
+          <option value="FOB">FOB (본선인도조건)</option>
+          <option value="EXW">EXW (공장인도조건)</option>
+          <option value="CIF">CIF (운임보험료포함조건)</option>
+          <option value="DDP">DDP (관세지급인도조건)</option>
+          <option value="DAP">DAP (도착장소인도조건)</option>
+        </select>
+      </div>
+      <div>
+        <label>희망 출항일 (ETD)</label>
+        <input id="etd" type="date">
+      </div>
+    </div>
+
+    <hr style="border: 0; border-top: 1px solid #E2E8F0; margin: 24px 0;">
+
+    <!-- 3. 화물 정보 -->
+    <div class="grid">
+      <div>
+        <label>품목명 (Cargo Description) *</label>
+        <input id="cargo" placeholder="예: 일반공업제품, 전자부품" required>
+      </div>
+      
+      <div id="fcl-spec">
+        <label>컨테이너 규격 및 수량 *</label>
+        <select id="fcl_type">
+          <option value="20ft x 1">20ft Dry x 1</option>
+          <option value="40ft x 1">40ft Dry x 1</option>
+          <option value="40HC x 1">40ft High Cube x 1</option>
+        </select>
+      </div>
+
+      <div id="lcl-spec" style="display:none;" class="full">
+        <div class="grid">
+          <div>
+            <label>총 CBM (부피)</label>
+            <div class="cbm-input-group">
+              <input id="cbm" type="number" step="0.001" placeholder="0.000">
+              <button type="button" class="btn-sm" onclick="openCbmModal()">CBM 계산기</button>
+            </div>
+          </div>
+          <div>
+            <label>총 중량 (Gross Weight, kg)</label>
+            <input id="weight" type="number" placeholder="0">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr style="border: 0; border-top: 1px solid #E2E8F0; margin: 24px 0;">
+
+    <!-- 4. 담당자 정보 -->
+    <div class="grid">
+      <div><label>회사명 *</label><input id="company" required></div>
+      <div><label>담당자명 *</label><input id="name" required></div>
+      <div><label>연락처 *</label><input id="phone" type="tel" placeholder="010-1234-5678" required></div>
+      <div><label>이메일 *</label><input id="email" type="email" placeholder="example@company.com" required></div>
+      <div class="full">
+        <label>추가 요청사항</label>
+        <textarea id="memo" rows="3" placeholder="위험물 여부, 특수화물, 딜리버리 요청 등 추가 정보를 작성하세요."></textarea>
+      </div>
+    </div>
+
+    <button type="submit" class="btn-submit">견적 문의 접수하기</button>
+  </form>
+</div>
+
+<!-- CBM 계산기 모달 -->
+<div id="cbmModal" class="modal-overlay">
+  <div class="modal-box">
+    <h2 style="font-size: 18px; margin: 0 0 16px;">CBM(화물 부피) 자동 계산기</h2>
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <div><label>가로 (Width, cm)</label><input id="dim_w" type="number" placeholder="100"></div>
+      <div><label>세로 (Length, cm)</label><input id="dim_l" type="number" placeholder="100"></div>
+      <div><label>높이 (Height, cm)</label><input id="dim_h" type="number" placeholder="100"></div>
+      <div><label>상자/박스 수량 (Qty)</label><input id="dim_q" type="number" value="1"></div>
+      <div style="background: #F1F5F9; padding: 12px; border-radius: 8px; font-weight: 700; text-align: right;">
+        계산된 CBM: <span id="calc_res" style="color: var(--primary);">0.000</span> CBM
+      </div>
+    </div>
+    <div style="display: flex; gap: 8px; margin-top: 20px;">
+      <button type="button" class="btn-sm" style="flex:1; padding:12px;" onclick="closeCbmModal()">취소</button>
+      <button type="button" class="btn-submit" style="flex:1; margin:0;" onclick="applyCbm()">적용하기</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// 1. UN/LOCODE 주요 항구 데이터
+const PORTS = [
+  { code: 'KRPUS', name: 'Busan', country: 'Korea' },
+  { code: 'KRINC', name: 'Incheon', country: 'Korea' },
+  { code: 'KRKAN', name: 'Gwangyang', country: 'Korea' },
+  { code: 'USLAX', name: 'Los Angeles', country: 'USA' },
+  { code: 'USLGB', name: 'Long Beach', country: 'USA' },
+  { code: 'USNYC', name: 'New York', country: 'USA' },
+  { code: 'CNSHA', name: 'Shanghai', country: 'China' },
+  { code: 'CNNGB', name: 'Ningbo', country: 'China' },
+  { code: 'CNSZX', name: 'Shenzhen', country: 'China' },
+  { code: 'JPTYO', name: 'Tokyo', country: 'Japan' },
+  { code: 'JPOSA', name: 'Osaka', country: 'Japan' },
+  { code: 'DEHAM', name: 'Hamburg', country: 'Germany' },
+  { code: 'NLRTM', name: 'Rotterdam', country: 'Netherlands' }
+];
+
+function setupAutocomplete(inputId, listId) {
+  const input = document.getElementById(inputId);
+  const list = document.getElementById(listId);
+
+  input.addEventListener('input', function() {
+    const val = this.value.toUpperCase();
+    list.innerHTML = '';
+    if (!val) return;
+
+    const matches = PORTS.filter(p => p.code.includes(val) || p.name.toUpperCase().includes(val));
+    matches.forEach(p => {
+      const item = document.createElement('div');
+      item.innerHTML = `<b>${p.code}</b> - ${p.name}, ${p.country}`;
+      item.onclick = function() {
+        input.value = `${p.code} (${p.name}, ${p.country})`;
+        list.innerHTML = '';
+      };
+      list.appendChild(item);
+    });
+  });
+
+  document.addEventListener('click', (e) => { if (e.target !== input) list.innerHTML = ''; });
+}
+
+setupAutocomplete('origin', 'origin-list');
+setupAutocomplete('dest', 'dest-list');
+
+// 2. UI 모드 제어
+function toggleCargoFields() {
+  const isFcl = document.getElementById('m_fcl').checked;
+  document.getElementById('fcl-spec').style.display = isFcl ? 'block' : 'none';
+  document.getElementById('lcl-spec').style.display = isFcl ? 'none' : 'block';
+}
+
+// 3. CBM 계산기 모달
+function openCbmModal() { document.getElementById('cbmModal').classList.add('active'); }
+function closeCbmModal() { document.getElementById('cbmModal').classList.remove('active'); }
+
+['dim_w', 'dim_l', 'dim_h', 'dim_q'].forEach(id => {
+  document.getElementById(id).addEventListener('input', () => {
+    const w = Number(document.getElementById('dim_w').value) || 0;
+    const l = Number(document.getElementById('dim_l').value) || 0;
+    const h = Number(document.getElementById('dim_h').value) || 0;
+    const q = Number(document.getElementById('dim_q').value) || 1;
+    const cbm = (w * l * h * q) / 1000000;
+    document.getElementById('calc_res').textContent = cbm.toFixed(3);
+  });
+});
+
+function applyCbm() {
+  document.getElementById('cbm').value = document.getElementById('calc_res').textContent;
+  closeCbmModal();
+}
+
+// 4. Submit & API 호출 (알림톡/이메일 발송)
+async function handleFormSubmit(e) {
+  e.preventDefault();
+  const selectedMode = document.querySelector('input[name="mode"]:checked').value;
+  
+  const payload = {
+    mode: selectedMode,
+    origin: document.getElementById('origin').value,
+    dest: document.getElementById('dest').value,
+    inc: document.getElementById('inc').value,
+    etd: document.getElementById('etd').value || null,
+    cargo: document.getElementById('cargo').value,
+    fcl_type: selectedMode === '해상 FCL' ? document.getElementById('fcl_type').value : null,
+    cbm: selectedMode !== '해상 FCL' ? document.getElementById('cbm').value : null,
+    weight: selectedMode !== '해상 FCL' ? document.getElementById('weight').value : null,
+    company: document.getElementById('company').value,
+    name: document.getElementById('name').value,
+    phone: document.getElementById('phone').value,
+    email: document.getElementById('email').value,
+    memo: document.getElementById('memo').value
+  };
+
+  try {
+    const res = await fetch('/api/quote-inquiry', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    if (res.ok) {
+      alert('견적 문의가 정상적으로 접수되었습니다. 담당자 확인 후 카카오톡/이메일로 안내해 드립니다.');
+      location.reload();
+    } else {
+      alert('접수 중 오류가 발생했습니다.');
+    }
+  } catch (err) {
+    console.error(err);
+    alert('서버 통신 오류가 발생했습니다.');
+  }
+}
+</script>
+</body>
+</html>
