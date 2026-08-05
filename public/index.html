@@ -128,40 +128,85 @@
 
     <hr style="border: 0; border-top: 1px solid #E2E8F0; margin: 24px 0;">
 
-    <!-- 3. 화물 정보 -->
-    <div class="grid">
-      <div>
-        <label>품목명 (Cargo Description) *</label>
-        <input id="cargo" placeholder="예: 일반공업제품, 전자부품" required>
-      </div>
+   <!-- 3. 화물 정보 (조건부 표시 및 CBM 실시간 계산) -->
+<div class="grid">
+  <div>
+    <label>품목명 (Cargo Description) *</label>
+    <input id="cargo" placeholder="예: 일반공업제품, 전자부품" required>
+  </div>
+  
+  <!-- FCL 선택 시 노출 -->
+  <div id="fcl-spec">
+    <label>컨테이너 규격 및 수량 *</label>
+    <select id="fcl_type">
+      <option value="20ft x 1">20ft Dry x 1</option>
+      <option value="40ft x 1">40ft Dry x 1</option>
+      <option value="40HC x 1">40ft High Cube x 1</option>
+    </select>
+  </div>
+
+  <!-- LCL / 항공 선택 시 노출 (사이즈 직접 입력 & CBM 자동 계산) -->
+  <div id="lcl-spec" style="display:none;" class="full">
+    <div style="background: #F8FAFC; border: 1px solid #E2E8F0; padding: 20px; border-radius: 12px; margin-top: 8px;">
+      <div style="font-weight: 700; font-size: 14px; color: #1E293B; margin-bottom: 12px;">📦 화물 규격 (CBM 자동 계산)</div>
       
-      <div id="fcl-spec">
-        <label>컨테이너 규격 및 수량 *</label>
-        <select id="fcl_type">
-          <option value="20ft x 1">20ft Dry x 1</option>
-          <option value="40ft x 1">40ft Dry x 1</option>
-          <option value="40HC x 1">40ft High Cube x 1</option>
-        </select>
+      <!-- 가로, 세로, 높이, 수량 입력 필드 -->
+      <div class="grid" style="grid-template-columns: repeat(4, 1fr); gap: 10px;">
+        <div>
+          <label style="font-size: 12px;">가로 (cm)</label>
+          <input id="dim_w" type="number" placeholder="100" oninput="calcCbm()">
+        </div>
+        <div>
+          <label style="font-size: 12px;">세로 (cm)</label>
+          <input id="dim_l" type="number" placeholder="100" oninput="calcCbm()">
+        </div>
+        <div>
+          <label style="font-size: 12px;">높이 (cm)</label>
+          <input id="dim_h" type="number" placeholder="100" oninput="calcCbm()">
+        </div>
+        <div>
+          <label style="font-size: 12px;">상자 수량 (EA)</label>
+          <input id="dim_q" type="number" value="1" placeholder="1" oninput="calcCbm()">
+        </div>
       </div>
 
-      <div id="lcl-spec" style="display:none;" class="full">
-        <div class="grid">
-          <div>
-            <label>총 CBM (부피)</label>
-            <div class="cbm-input-group">
-              <input id="cbm" type="number" step="0.001" placeholder="0.000">
-              <button type="button" class="btn-sm" onclick="openCbmModal()">CBM 계산기</button>
-            </div>
-          </div>
-          <div>
-            <label>총 중량 (Gross Weight, kg)</label>
-            <input id="weight" type="number" placeholder="0">
-          </div>
+      <!-- 계산 결과 & 중량 입력 -->
+      <div class="grid" style="margin-top: 14px;">
+        <div>
+          <label>총 부피 (CBM) - 자동계산</label>
+          <input id="cbm" type="number" step="0.001" placeholder="0.000" readonly style="background: #F1F5F9; font-weight: 700; color: #0F4C81;">
+        </div>
+        <div>
+          <label>총 중량 (Gross Weight, kg)</label>
+          <input id="weight" type="number" placeholder="0">
         </div>
       </div>
     </div>
+  </div>
+</div>
 
-    <hr style="border: 0; border-top: 1px solid #E2E8F0; margin: 24px 0;">
+<script>
+// CBM 실시간 자동 계산 함수
+function calcCbm() {
+  const w = Number(document.getElementById('dim_w').value) || 0;
+  const l = Number(document.getElementById('dim_l').value) || 0;
+  const h = Number(document.getElementById('dim_h').value) || 0;
+  const q = Number(document.getElementById('dim_q').value) || 1;
+
+  // CBM 공식: (가로cm * 세로cm * 높이cm * 수량) / 1,000,000
+  const cbm = (w * l * h * q) / 1000000;
+  
+  // 소수점 3자리까지 자동 반영
+  document.getElementById('cbm').value = cbm > 0 ? cbm.toFixed(3) : '';
+}
+
+// 운송 수단(FCL / LCL / 항공) 변경에 따른 화면 전환
+function toggleCargoFields() {
+  const isFcl = document.getElementById('m_fcl').checked;
+  document.getElementById('fcl-spec').style.display = isFcl ? 'block' : 'none';
+  document.getElementById('lcl-spec').style.display = isFcl ? 'none' : 'block';
+}
+</script>
 
     <!-- 4. 담당자 정보 -->
     <div class="grid">
