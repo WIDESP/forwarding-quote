@@ -1,0 +1,21 @@
+GitHub 업로드 구조
+
+아래 구조 그대로 보이면 정상입니다.
+
+api/
+  config.js
+
+public/
+  admin.html
+  index.html
+
+package.json
+vercel.json
+supabase.sql
+DEPLOY-KO.md
+README.md
+
+중요:
+- ZIP 파일 자체를 GitHub에 올리지 마세요.
+- ZIP 압축을 푼 뒤 위의 파일/폴더를 모두 선택해 업로드하세요.
+- api와 public 폴더를 풀어서 루트에 올리지 말고 폴더째 올려야 합니다.
