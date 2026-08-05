@@ -36,22 +36,22 @@ async function submitQuote(){
  if(!document.getElementById('agree').checked)return alert('개인정보 수집 및 이용에 동의해주세요.');
  if(!cfg || !cfg.supabaseUrl || !cfg.supabasePublishableKey)return alert('Supabase 연결 설정을 확인해주세요. 잠시 후 다시 시도해주세요.');
 
- const payload={
-   company:company.value,
-   name:name.value,
-   phone:phone.value,
-   email:email.value,
-   origin:origin.value,
-   dest:dest.value,
-   mode:mode.value,
-   service:service.value,
-   cargo:cargo.value,
-   qty:qty.value,
-   weight:weight.value,
-   cbm:cbm.value,
-   inc:inc.value,
-   etd:etd.value || null,
-   memo:memo.value,
+const payload={
+   company:document.getElementById('company').value,
+   name:document.getElementById('name').value,
+   phone:document.getElementById('phone').value,
+   email:document.getElementById('email').value,
+   origin:document.getElementById('origin').value,
+   dest:document.getElementById('dest').value,
+   mode:document.getElementById('mode').value,
+   service:document.getElementById('service').value,
+   cargo:document.getElementById('cargo').value,
+   qty:document.getElementById('qty').value,
+   weight:document.getElementById('weight').value,
+   cbm:document.getElementById('cbm').value,
+   inc:document.getElementById('inc').value,
+   etd:document.getElementById('etd').value || null,
+   memo:document.getElementById('memo').value,
    status:'견적작성',
    costs:[]
 };
