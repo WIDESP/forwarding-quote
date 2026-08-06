@@ -31,7 +31,7 @@
   .header-group h1 { font-size: 28px; font-weight: 800; color: #0F4C81; margin: 0; letter-spacing: -0.5px; }
   .header-group p { color: var(--text-sub); font-size: 15px; margin-top: 12px; line-height: 1.6; }
   
-  /* 캐릭터 타이틀 레이아웃 및 둥실둥실 애니메이션 */
+  /* 캐릭터 타이틀 레이아웃 및 애니메이션 */
   .header-title-wrapper {
     display: inline-flex;
     align-items: center;
@@ -173,28 +173,46 @@
     <!-- 헤더 타이틀 영역 (좌: 와래 / 우: 와박스) -->
     <div class="header-group">
       <div class="header-title-wrapper">
-        <!-- [왼쪽] 귀여운 고래 캐릭터 (와래) -->
+        <!-- [왼쪽] 고래 캐릭터 (몸통, 꼬리, 물줄기, 선장모자 선명화) -->
         <span class="char-icon char-left">
-          <svg width="60" height="60" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10 82 Q 30 76, 50 82 T 90 82" stroke="#38BDF8" stroke-width="4.5" stroke-linecap="round" fill="none"/>
-            <path d="M 46 22 C 44 14, 38 10, 32 12" stroke="#38BDF8" stroke-width="3" stroke-linecap="round" fill="none"/>
-            <path d="M 50 20 C 50 10, 50 8, 50 6" stroke="#38BDF8" stroke-width="3" stroke-linecap="round" fill="none"/>
-            <path d="M 54 22 C 56 14, 62 10, 68 12" stroke="#38BDF8" stroke-width="3" stroke-linecap="round" fill="none"/>
-            <path d="M 20 54 C 20 28, 80 28, 85 54 C 88 66, 75 76, 50 76 C 25 76, 20 66, 20 54 Z" fill="#0F4C81"/>
-            <path d="M 26 56 C 30 71, 70 71, 74 56 C 65 64, 35 64, 26 56 Z" fill="#E0F2FE"/>
-            <path d="M 22 58 C 14 60, 10 66, 16 70 C 20 68, 22 62, 24 59 Z" fill="#093760"/>
-            <circle cx="62" cy="46" r="4.5" fill="#1E293B"/>
-            <circle cx="63.5" cy="44.5" r="1.5" fill="#FFFFFF"/>
-            <ellipse cx="70" cy="52" rx="4" ry="2.5" fill="#F43F5E" opacity="0.75"/>
-            <path d="M 56 53 Q 61 58 65 52" stroke="#0F4C81" stroke-width="2" stroke-linecap="round" fill="none"/>
-            <path d="M 42 27 L 62 27 L 60 22 L 44 22 Z" fill="#1E293B"/>
-            <rect x="38" y="26" width="28" height="2.5" rx="1" fill="#F59E0B"/>
+          <svg width="68" height="60" viewBox="0 0 110 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- 시원한 물줄기 -->
+            <path d="M 46 22 Q 38 12 28 15" stroke="#38BDF8" stroke-width="3" stroke-linecap="round" fill="none"/>
+            <path d="M 50 20 L 50 8" stroke="#38BDF8" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+            <path d="M 54 22 Q 62 12 72 15" stroke="#38BDF8" stroke-width="3" stroke-linecap="round" fill="none"/>
+
+            <!-- 바다 파도 -->
+            <path d="M 5 78 Q 28 72 50 78 T 95 78" stroke="#38BDF8" stroke-width="4" stroke-linecap="round" fill="none"/>
+
+            <!-- 고래 몸통 & 생생한 꼬리 (좌측으로 넘실거리는 꼬리) -->
+            <path d="M 12 60 C 4 52 2 40 10 38 C 18 36 24 48 30 52 C 40 30 88 30 96 52 C 102 68 84 76 56 76 C 30 76 18 68 12 60 Z" fill="#0F4C81"/>
+            <path d="M 10 38 C 4 30 12 22 18 32 C 16 36 12 38 10 38 Z" fill="#093760"/>
+
+            <!-- 고래의 하얀 배 (라인) -->
+            <path d="M 32 58 C 38 71 80 71 88 56 C 78 65 42 65 32 58 Z" fill="#E0F2FE"/>
+
+            <!-- 가슴 지느러미 -->
+            <path d="M 48 62 C 40 66 38 72 44 74 C 48 72 50 66 52 63 Z" fill="#093760"/>
+
+            <!-- 눈 & 하이라이트 -->
+            <circle cx="74" cy="46" r="4.5" fill="#1E293B"/>
+            <circle cx="75.5" cy="44.5" r="1.5" fill="#FFFFFF"/>
+            
+            <!-- 발그레 볼터치 -->
+            <ellipse cx="83" cy="51" rx="4" ry="2.5" fill="#F43F5E" opacity="0.8"/>
+            
+            <!-- 방긋 미소 -->
+            <path d="M 68 52 Q 73 57 77 52" stroke="#0F4C81" stroke-width="2" stroke-linecap="round" fill="none"/>
+
+            <!-- 선장 모자 -->
+            <path d="M 44 29 L 62 29 L 60 24 L 46 24 Z" fill="#1E293B"/>
+            <rect x="40" y="28" width="26" height="2.5" rx="1" fill="#F59E0B"/>
           </svg>
         </span>
 
         <h1>국제운송 견적 문의</h1>
 
-        <!-- [오른쪽] 진짜 컨테이너 느낌의 캐릭터 (와박스) -->
+        <!-- [오른쪽] 컨테이너 캐릭터 (와박스) -->
         <span class="char-icon char-right">
           <svg width="60" height="60" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect x="36" y="74" width="8" height="11" rx="4" fill="#093760"/>
@@ -302,7 +320,6 @@
           </label>
         </div>
 
-        <!-- 내륙운송 체크 시 나타나는 픽업지/하차지 입력란 -->
         <div id="trucking-box" class="trucking-address-box">
           <div class="grid">
             <div class="form-group">
@@ -326,7 +343,6 @@
         <input id="cargo" placeholder="예: 전자부품, 일반공업제품" required>
       </div>
 
-      <!-- FCL 전용 컨테이너 타입 선택 버튼들 -->
       <div id="fcl-type-box" class="form-group full">
         <label>컨테이너 타입 선택 *</label>
         <div class="type-grid">
@@ -350,13 +366,11 @@
         </div>
       </div>
 
-      <!-- 공통 중량 입력란 -->
       <div class="form-group full">
         <label>총 중량 (Gross Weight, kg) *</label>
         <input id="weight" type="number" placeholder="예: 5000" required>
       </div>
 
-      <!-- LCL, Air 및 OT/FR/BULK/미정 선택 시 나타나는 화물 사이즈 입력 박스 -->
       <div id="dim-spec-box" class="full" style="display:none;">
         <div class="cbm-box">
           <label style="color:#0F4C81; margin-bottom:12px; display:block;">📏 화물 사이즈 직접 입력 (다중 규격 추가 가능)</label>
@@ -400,18 +414,14 @@
   </form>
 </div>
 
-<!-- EmailJS SDK 연동 -->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-<!-- Supabase SDK 연동 -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script type="text/javascript">
-  // 1. EmailJS 초기화
   (function() {
     emailjs.init("AZNplwsjRX-VEjTqg");
   })();
 
-  // 2. Supabase 클라이언트 초기화
   const SUPABASE_URL = window.ENV_SUPABASE_URL || 'https://YOUR_SUPABASE_PROJECT_ID.supabase.co';
   const SUPABASE_ANON_KEY = window.ENV_SUPABASE_ANON_KEY || 'YOUR_SUPABASE_ANON_KEY';
   
@@ -420,7 +430,6 @@
     supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
   }
 
-  // 3. 주요 포트 데이터 및 자동완성
   const PORTS = [
     { code: 'KRPUS', name: 'Busan', country: 'Korea' },
     { code: 'KRINC', name: 'Incheon', country: 'Korea' },
@@ -457,13 +466,11 @@
   setupAutocomplete('origin', 'origin-list');
   setupAutocomplete('dest', 'dest-list');
 
-  // 내륙운송 토글 기능
   function toggleTruckingBox() {
     const chk = document.getElementById('svc_trucking').checked;
     document.getElementById('trucking-box').style.display = chk ? 'block' : 'none';
   }
 
-  // 4. 다중 화물 행 추가 / 삭제
   function addDimRow() {
     const container = document.getElementById('dim-container');
     const newRow = document.createElement('div');
@@ -483,7 +490,6 @@
     calcCbm();
   }
 
-  // 5. 부피(CBM) 및 항공 Volume Weight 실시간 계산
   function calcCbm() {
     const rows = document.querySelectorAll('.cbm-row');
     const isAir = document.getElementById('m_air').checked;
@@ -505,7 +511,6 @@
     document.getElementById('cbm').value = totalResult > 0 ? totalResult.toFixed(isAir ? 2 : 3) : '';
   }
 
-  // 6. 운송 방식 변경 시 UI 전환
   function toggleMode() {
     const isFcl = document.getElementById('m_fcl').checked;
     const isAir = document.getElementById('m_air').checked;
@@ -541,7 +546,6 @@
     calcCbm();
   }
 
-  // 7. 견적 문의 제출
   async function submitQuote() {
     const btnSubmit = document.getElementById('btnSubmit');
     btnSubmit.disabled = true;
@@ -555,7 +559,6 @@
       ? (document.querySelector('input[name="container_type"]:checked')?.value || '20DC')
       : '해당없음(LCL/Air)';
 
-    // 부가 서비스 체크박스 및 주소 모음
     let services = [];
     if (document.getElementById('svc_customs').checked) services.push("통관대행");
     
