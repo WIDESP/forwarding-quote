@@ -173,88 +173,11 @@
   </div>
 
   <form id="quoteForm" class="card" onsubmit="event.preventDefault(); submitQuote();">
-    <!-- 헤더 타이틀 영역 (좌: 하늘색 비행기 캐릭터 / 우: 하늘색 컨테이너 캐릭터) -->
+    <!-- 헤더 타이틀 영역 (좌: 고래 이모지 / 우: 하늘색 컨테이너 캐릭터) -->
     <div class="header-group">
       <div class="header-title-wrapper">
-       <!-- [왼쪽] 비행기 캐릭터 (image_d19202.jpg 참고 3D 스타일) -->
-        <span class="char-icon char-left">
-          <svg width="150" height="110" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
-            
-            <!-- 1. 뒷쪽 (왼쪽) 날개 및 엔진 -->
-            <path d="M 450 360 L 650 300 L 720 280 L 720 320 L 500 380 Z" fill="#CBD5E1"/>
-            <path d="M 720 280 L 750 220 L 760 230 L 720 320 Z" fill="#124E96"/>
-            <ellipse cx="580" cy="380" rx="25" ry="35" fill="#124E96"/>
-
-            <!-- 2. 몸체 (파란 바탕 - 하단) -->
-            <path d="M 120 400 C 50 400 40 220 180 180 C 380 120 580 200 680 280 C 740 320 740 420 620 440 C 450 460 200 460 120 400 Z" fill="#124E96"/>
-
-            <!-- 3. 몸체 (흰색 덮개 - 상단) -->
-            <path d="M 100 360 Q 300 420 680 340 C 730 320 740 280 680 280 C 580 200 380 120 180 180 C 40 220 50 360 100 360 Z" fill="#F8FAFC"/>
-
-            <!-- 4. 꼬리 날개 및 로고 -->
-            <path d="M 540 220 L 640 60 C 670 30 720 40 700 120 L 660 300 Z" fill="#124E96"/>
-            <text x="640" y="180" fill="#FFFFFF" font-family="sans-serif" font-weight="900" font-size="60" transform="rotate(15 640 180)">W</text>
-            <!-- 로고 옆 물방울 포인트 -->
-            <ellipse cx="615" cy="140" rx="8" ry="16" fill="#38BDF8" transform="rotate(15 615 140)"/>
-
-            <!-- 5. 조종석 유리창 (하늘색) -->
-            <path d="M 170 190 C 280 180 360 220 380 310 C 380 340 200 360 120 300 C 95 260 110 200 170 190 Z" fill="#7DD3FC"/>
-
-            <!-- 6. 초롱초롱한 눈, 코, 입, 볼터치 -->
-            <!-- 왼쪽 눈 -->
-            <ellipse cx="210" cy="250" rx="35" ry="45" fill="#FFFFFF"/>
-            <ellipse cx="225" cy="255" rx="18" ry="25" fill="#0F172A"/>
-            <circle cx="230" cy="240" r="7" fill="#FFFFFF"/>
-            <!-- 오른쪽 눈 -->
-            <ellipse cx="320" cy="265" rx="30" ry="40" fill="#FFFFFF"/>
-            <ellipse cx="330" cy="270" rx="15" ry="22" fill="#0F172A"/>
-            <circle cx="335" cy="255" r="6" fill="#FFFFFF"/>
-            <!-- 눈썹 -->
-            <path d="M 180 190 Q 210 170 240 190" stroke="#0F172A" stroke-width="8" stroke-linecap="round" fill="none"/>
-            <path d="M 290 210 Q 320 190 350 215" stroke="#0F172A" stroke-width="8" stroke-linecap="round" fill="none"/>
-            <!-- 볼터치 -->
-            <ellipse cx="160" cy="330" rx="22" ry="14" fill="#FF8A8A" opacity="0.9"/>
-            <ellipse cx="340" cy="345" rx="22" ry="14" fill="#FF8A8A" opacity="0.9"/>
-            <!-- 웃는 입과 혀 -->
-            <path d="M 230 350 Q 260 410 290 350 Q 260 370 230 350 Z" fill="#450A0A"/>
-            <path d="M 245 375 Q 260 400 275 375 Q 260 385 245 375 Z" fill="#FF8A8A"/>
-
-            <!-- 7. 측면 창문 및 텍스트 -->
-            <circle cx="440" cy="290" r="14" fill="#124E96"/>
-            <circle cx="490" cy="295" r="14" fill="#124E96"/>
-            <circle cx="540" cy="300" r="14" fill="#124E96"/>
-            <circle cx="590" cy="305" r="14" fill="#124E96"/>
-            <text x="410" y="360" fill="#124E96" font-family="sans-serif" font-weight="900" font-size="32" letter-spacing="1" transform="rotate(5 410 360)">WIDE SHIPPING</text>
-
-            <!-- 8. 앞쪽 (오른쪽) 날개 및 엔진 -->
-            <!-- 앞 엔진 -->
-            <path d="M 300 440 L 320 500 L 350 480 Z" fill="#94A3B8"/>
-            <ellipse cx="300" cy="510" rx="55" ry="40" fill="#124E96" transform="rotate(-15 300 510)"/>
-            <ellipse cx="250" cy="520" rx="20" ry="38" fill="#E2E8F0" transform="rotate(-15 250 520)"/>
-            <ellipse cx="250" cy="520" rx="12" ry="28" fill="#0F172A" transform="rotate(-15 250 520)"/>
-            <!-- 앞 날개 -->
-            <path d="M 360 410 L 160 550 C 140 565 110 560 120 530 L 150 470 L 400 390 Z" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="4"/>
-            <!-- 앞 날개 윙렛(끝부분 올라간 형태) -->
-            <path d="M 120 530 L 90 440 C 80 410 110 400 120 430 L 150 470 Z" fill="#124E96"/>
-
-            <!-- 9. 앞쪽 팔 (인사하는 흰색 장갑 손) -->
-            <path d="M 190 320 Q 90 260 110 120" stroke="#124E96" stroke-width="35" stroke-linecap="round" fill="none"/>
-            <ellipse cx="110" cy="110" rx="40" ry="35" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="4" transform="rotate(-20 110 110)"/>
-            <!-- 손가락 4개 디테일 -->
-            <path d="M 75 120 C 50 120 40 90 65 95" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="4" stroke-linecap="round"/>
-            <path d="M 85 90 C 70 40 100 30 105 80" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="4" stroke-linecap="round"/>
-            <path d="M 110 80 C 100 30 130 20 130 75" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="4" stroke-linecap="round"/>
-            <path d="M 130 85 C 130 40 155 40 145 90" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="4" stroke-linecap="round"/>
-            
-            <!-- 10. 뒷쪽 팔 (날개에 자연스럽게 걸친 손) -->
-            <path d="M 460 380 Q 520 430 580 440" stroke="#124E96" stroke-width="25" stroke-linecap="round" fill="none"/>
-            <circle cx="590" cy="440" r="22" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="3"/>
-            <circle cx="575" cy="455" r="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="3"/>
-            <circle cx="595" cy="460" r="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="3"/>
-            <circle cx="615" cy="450" r="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="3"/>
-
-          </svg>
-        </span>
+        <!-- [왼쪽] 고래 이모지 -->
+        <span class="char-icon char-left">🐳</span>
 
         <h1>국제운송 견적 문의</h1>
 
