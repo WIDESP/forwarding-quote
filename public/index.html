@@ -36,7 +36,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 16px;
+    gap: 20px;
   }
 
   .char-icon {
@@ -49,9 +49,6 @@
 
   .char-left {
     animation-delay: 0s;
-    font-size: 38px;
-    line-height: 1;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.08));
   }
 
   .char-right {
@@ -173,15 +170,49 @@
   </div>
 
   <form id="quoteForm" class="card" onsubmit="event.preventDefault(); submitQuote();">
-    <!-- 헤더 타이틀 영역 (좌: 고래 이모지 / 우: 흰색 모자 컨테이너 캐릭터) -->
+    <!-- 헤더 타이틀 영역 (좌: 비행기 캐릭터 SVG / 우: 컨테이너 캐릭터 SVG) -->
     <div class="header-group">
       <div class="header-title-wrapper">
-        <!-- [왼쪽] 고래 이모지 -->
-        <span class="char-icon char-left">🐳</span>
+        
+        <!-- [왼쪽] 요청하신 비행기 캐릭터 SVG 코딩 적용 -->
+        <span class="char-icon char-left">
+          <svg width="120" height="75" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- 비행기 동체 배경 날개 -->
+            <path d="M 20 70 L 60 90 L 100 70 Z" fill="#38BDF8"/>
+            <!-- 메인 동체 (흰색 바디 & 파란 하단) -->
+            <path d="M 20 75 C 10 75 15 45 40 35 C 80 20 140 25 170 50 C 190 65 185 85 160 85 C 110 90 50 90 20 75 Z" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+            <path d="M 20 75 C 50 90 110 90 160 85 C 185 85 190 65 170 50 C 140 75 80 85 20 75 Z" fill="#22C5EE"/>
+            
+            <!-- 꼬리 날개 -->
+            <path d="M 130 40 L 155 5 C 165 0 175 5 170 20 L 150 50 Z" fill="#22C5EE"/>
+            <text x="153" y="32" fill="#FFFFFF" font-family="sans-serif" font-weight="900" font-size="18">W</text>
+
+            <!-- 조종석 창문 -->
+            <path d="M 135 30 C 160 30 175 40 175 55 C 175 60 140 60 125 50 C 120 40 125 32 135 30 Z" fill="#7DD3FC"/>
+
+            <!-- 기체 창문들 -->
+            <circle cx="70" cy="50" r="3.5" fill="#22C5EE"/>
+            <circle cx="85" cy="50" r="3.5" fill="#22C5EE"/>
+            <circle cx="100" cy="50" r="3.5" fill="#22C5EE"/>
+            <text x="65" y="66" fill="#0F4C81" font-family="sans-serif" font-weight="900" font-size="10">WIDE SHIPPING</text>
+
+            <!-- 얼굴 (눈, 볼터치, 미소) -->
+            <circle cx="148" cy="46" r="4" fill="#0F172A"/>
+            <circle cx="163" cy="48" r="4" fill="#0F172A"/>
+            <circle cx="149.5" cy="45" r="1.2" fill="#FFFFFF"/>
+            <circle cx="164.5" cy="47" r="1.2" fill="#FFFFFF"/>
+            <ellipse cx="142" cy="52" rx="4" ry="2.5" fill="#FF8A8A"/>
+            <ellipse cx="169" cy="54" rx="4" ry="2.5" fill="#FF8A8A"/>
+            <path d="M 152 53 Q 157 58 162 53" stroke="#0F172A" stroke-width="2" stroke-linecap="round" fill="none"/>
+
+            <!-- 앞쪽 작은 날개 (노즈콘) -->
+            <path d="M 175 52 L 195 54 L 175 56 Z" fill="#22C5EE"/>
+          </svg>
+        </span>
 
         <h1>국제운송 견적 문의</h1>
 
-        <!-- [오른쪽] 가로로 길어진 와이드해운 컨테이너 캐릭터 (모자 색상 흰색 변경) -->
+        <!-- [오른쪽] 기존 컨테이너 캐릭터 -->
         <span class="char-icon char-right">
           <svg width="110" height="60" viewBox="0 0 160 90" fill="none" xmlns="http://www.w3.org/2000/svg">
             <!-- 발 -->
@@ -192,27 +223,26 @@
             <path d="M 12 50 Q 4 54 4 60" stroke="#093760" stroke-width="4.5" stroke-linecap="round" fill="none"/>
             <circle cx="4" cy="60" r="4" fill="#093760"/>
 
-            <!-- 오른쪽 팔 & 손 (흔드는 손동작) -->
+            <!-- 오른쪽 팔 & 손 -->
             <path d="M 148 50 Q 156 42 158 34" stroke="#093760" stroke-width="4.5" stroke-linecap="round" fill="none"/>
             <circle cx="158" cy="34" r="4" fill="#093760"/>
 
-            <!-- 컨테이너 몸체 (가로가 긴 직사각형) -->
+            <!-- 컨테이너 몸체 -->
             <rect x="12" y="22" width="136" height="52" rx="4" fill="#0F4C81" stroke="#093760" stroke-width="2.5"/>
             
-            <!-- 코너 캐스팅 블록 (모서리 디테일) -->
+            <!-- 코너 캐스팅 블록 -->
             <rect x="12" y="22" width="6" height="6" fill="#1E5C96"/>
             <rect x="142" y="22" width="6" height="6" fill="#1E5C96"/>
             <rect x="12" y="68" width="6" height="6" fill="#1E5C96"/>
             <rect x="142" y="68" width="6" height="6" fill="#1E5C96"/>
 
-            <!-- 컨테이너 골판지 세로 요철 라인 -->
+            <!-- 골판지 세로 요철 라인 -->
             <line x1="28" y1="28" x2="28" y2="68" stroke="#1E5C96" stroke-width="2"/>
             <line x1="44" y1="28" x2="44" y2="68" stroke="#1E5C96" stroke-width="2"/>
             <line x1="60" y1="28" x2="60" y2="68" stroke="#1E5C96" stroke-width="2"/>
 
-            <!-- 우측 문짝 구분선 및 잠금장치(로드바) -->
+            <!-- 문짝 구분선 및 잠금장치 -->
             <line x1="112" y1="22" x2="112" y2="74" stroke="#093760" stroke-width="2.5"/>
-            <!-- 문고리 레버 -->
             <line x1="120" y1="34" x2="120" y2="62" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
             <circle cx="120" cy="33" r="2" fill="#FFFFFF"/>
             <circle cx="120" cy="63" r="2" fill="#FFFFFF"/>
@@ -224,7 +254,7 @@
             <text x="20" y="49" fill="#FFFFFF" font-size="11" font-weight="900" font-family="sans-serif" letter-spacing="0.5">WIDE</text>
             <text x="20" y="61" fill="#FFFFFF" font-size="11" font-weight="900" font-family="sans-serif" letter-spacing="0.5">SHIPPING</text>
 
-            <!-- 중앙 얼굴 (눈, 볼터치, 미소) -->
+            <!-- 중앙 얼굴 -->
             <circle cx="82" cy="45" r="5.5" fill="#FFFFFF"/>
             <circle cx="102" cy="45" r="5.5" fill="#FFFFFF"/>
             <circle cx="83.5" cy="45" r="2.8" fill="#1E293B"/>
@@ -236,11 +266,12 @@
             <ellipse cx="108.5" cy="51" rx="3" ry="1.8" fill="#F43F5E" opacity="0.7"/>
             <path d="M 88 50 Q 92 55 96 50" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" fill="none"/>
 
-            <!-- 상단 하부 지붕 고정 장치 (흰색 포인트로 변경) -->
+            <!-- 상단 지붕 고정 장치 -->
             <path d="M 72 22 C 72 15, 88 15, 88 22 Z" fill="#FFFFFF"/>
             <rect x="69" y="20.5" width="22" height="2.5" rx="1" fill="#CBD5E1"/>
           </svg>
         </span>
+
       </div>
       <p>
         하기의 화물 및 운송 정보를 입력해 주시면 담당자가 확인 후 신속히 안내드릴 수 있도록 하겠습니다.<br>
