@@ -31,7 +31,6 @@
   .header-group h1 { font-size: 28px; font-weight: 800; color: #0F4C81; margin: 0; letter-spacing: -0.5px; }
   .header-group p { color: var(--text-sub); font-size: 15px; margin-top: 12px; line-height: 1.6; }
   
-  /* 타이틀 레이아웃 및 애니메이션 */
   .header-title-wrapper {
     display: inline-flex;
     align-items: center;
@@ -47,13 +46,8 @@
     animation: floatChar 3s ease-in-out infinite;
   }
 
-  .char-left {
-    animation-delay: 0s;
-  }
-
-  .char-right {
-    animation-delay: 1.5s;
-  }
+  .char-left { animation-delay: 0s; }
+  .char-right { animation-delay: 1.5s; }
 
   @keyframes floatChar {
     0%, 100% { transform: translateY(0); }
@@ -63,7 +57,6 @@
   .section-title { font-size: 16px; font-weight: 700; color: #0F172A; margin: 28px 0 16px; display: flex; align-items: center; gap: 8px; }
   .section-title::before { content: ''; display: inline-block; width: 4px; height: 16px; background: var(--primary); border-radius: 2px; }
 
-  /* Segment Control (운송수단) */
   .segment-control { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
   .segment-control input { display: none; }
   .segment-control label {
@@ -75,7 +68,6 @@
     border-color: var(--primary); background: #F0F6FF; color: var(--primary); font-weight: 700; box-shadow: 0 2px 8px rgba(15,76,129,0.12);
   }
 
-  /* 컨테이너 타입 그리드 선택 버튼 */
   .type-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 8px; }
   .type-grid input { display: none; }
   .type-grid label {
@@ -86,7 +78,6 @@
     border-color: var(--primary); background: #F0F6FF; color: var(--primary); font-weight: 700;
   }
 
-  /* 부가 서비스 체크박스 카드 그리드 */
   .service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
   .service-grid input { display: none; }
   .service-grid label {
@@ -101,13 +92,11 @@
   }
   .service-grid input:checked + label span.sub-text { color: var(--primary); }
 
-  /* 내륙운송 상세 주소 입력 박스 */
   .trucking-address-box {
     background: #F8FAFC; border: 1.5px solid #CBD5E1; border-radius: 12px;
     padding: 16px; margin-top: 12px; display: none;
   }
 
-  /* 2열 레이아웃 그리드 */
   .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
   .full { grid-column: 1 / -1; }
 
@@ -120,7 +109,6 @@
   }
   input:focus, select:focus, textarea:focus { border-color: var(--border-focus); box-shadow: 0 0 0 3px rgba(15,76,129,0.12); }
   
-  /* CBM / Volume Weight 계산 박스 및 행 추가 버튼 */
   .cbm-box { background: #F8FAFC; border: 1.5px dashed #CBD5E1; border-radius: 12px; padding: 20px; margin-top: 12px; }
   .cbm-row { display: grid; grid-template-columns: repeat(4, 1fr) 40px; gap: 8px; margin-bottom: 8px; align-items: end; }
   
@@ -137,7 +125,6 @@
   }
   .btn-del-row:hover { background: #FCA5A5; color: #FFF; }
   
-  /* 포트 자동완성 드롭다운 */
   .autocomplete-wrapper { position: relative; }
   .autocomplete-items {
     position: absolute; border: 1px solid var(--border); border-top: none; z-index: 99;
@@ -170,78 +157,70 @@
   </div>
 
   <form id="quoteForm" class="card" onsubmit="event.preventDefault(); submitQuote();">
-    <!-- 헤더 타이틀 영역 (좌: 비행기 캐릭터 SVG / 우: 컨테이너 캐릭터 SVG) -->
     <div class="header-group">
       <div class="header-title-wrapper">
         
-        <!-- [왼쪽] 요청하신 비행기 캐릭터 SVG 코딩 적용 -->
+        <!-- [왼쪽] 올바르게 좌우 대칭이 교정된 비행기 캐릭터 SVG -->
         <span class="char-icon char-left">
           <svg width="120" height="75" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- 비행기 동체 배경 날개 -->
-            <path d="M 20 70 L 60 90 L 100 70 Z" fill="#38BDF8"/>
-            <!-- 메인 동체 (흰색 바디 & 파란 하단) -->
-            <path d="M 20 75 C 10 75 15 45 40 35 C 80 20 140 25 170 50 C 190 65 185 85 160 85 C 110 90 50 90 20 75 Z" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
-            <path d="M 20 75 C 50 90 110 90 160 85 C 185 85 190 65 170 50 C 140 75 80 85 20 75 Z" fill="#22C5EE"/>
+            <!-- 배경 날개 -->
+            <path d="M 180 70 L 140 90 L 100 70 Z" fill="#38BDF8"/>
+            <!-- 메인 동체 (꼬리가 왼쪽, 머리가 오른쪽) -->
+            <path d="M 180 75 C 190 75 185 45 160 35 C 120 20 60 25 30 50 C 10 65 15 85 40 85 C 90 90 150 90 180 75 Z" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+            <path d="M 180 75 C 150 90 90 90 40 85 C 15 85 10 65 30 50 C 60 75 120 85 180 75 Z" fill="#22C5EE"/>
             
-            <!-- 꼬리 날개 -->
-            <path d="M 130 40 L 155 5 C 165 0 175 5 170 20 L 150 50 Z" fill="#22C5EE"/>
-            <text x="153" y="32" fill="#FFFFFF" font-family="sans-serif" font-weight="900" font-size="18">W</text>
+            <!-- 꼬리 날개 (왼쪽 배치 및 W 로고 정방향) -->
+            <path d="M 70 40 L 45 5 C 35 0 25 5 30 20 L 50 50 Z" fill="#22C5EE"/>
+            <text x="36" y="32" fill="#FFFFFF" font-family="sans-serif" font-weight="900" font-size="18">W</text>
 
-            <!-- 조종석 창문 -->
-            <path d="M 135 30 C 160 30 175 40 175 55 C 175 60 140 60 125 50 C 120 40 125 32 135 30 Z" fill="#7DD3FC"/>
+            <!-- 조종석 창문 (오른쪽 배치) -->
+            <path d="M 65 30 C 40 30 25 40 25 55 C 25 60 60 60 75 50 C 80 40 75 32 65 30 Z" fill="#7DD3FC"/>
 
             <!-- 기체 창문들 -->
-            <circle cx="70" cy="50" r="3.5" fill="#22C5EE"/>
-            <circle cx="85" cy="50" r="3.5" fill="#22C5EE"/>
+            <circle cx="130" cy="50" r="3.5" fill="#22C5EE"/>
+            <circle cx="115" cy="50" r="3.5" fill="#22C5EE"/>
             <circle cx="100" cy="50" r="3.5" fill="#22C5EE"/>
-            <text x="65" y="66" fill="#0F4C81" font-family="sans-serif" font-weight="900" font-size="10">WIDE SHIPPING</text>
+            <text x="74" y="66" fill="#0F4C81" font-family="sans-serif" font-weight="900" font-size="10">WIDE SHIPPING</text>
 
-            <!-- 얼굴 (눈, 볼터치, 미소) -->
-            <circle cx="148" cy="46" r="4" fill="#0F172A"/>
-            <circle cx="163" cy="48" r="4" fill="#0F172A"/>
-            <circle cx="149.5" cy="45" r="1.2" fill="#FFFFFF"/>
-            <circle cx="164.5" cy="47" r="1.2" fill="#FFFFFF"/>
-            <ellipse cx="142" cy="52" rx="4" ry="2.5" fill="#FF8A8A"/>
-            <ellipse cx="169" cy="54" rx="4" ry="2.5" fill="#FF8A8A"/>
-            <path d="M 152 53 Q 157 58 162 53" stroke="#0F172A" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <!-- 얼굴 (눈, 볼터치, 미소 - 오른쪽 방향) -->
+            <circle cx="52" cy="46" r="4" fill="#0F172A"/>
+            <circle cx="37" cy="48" r="4" fill="#0F172A"/>
+            <circle cx="50.5" cy="45" r="1.2" fill="#FFFFFF"/>
+            <circle cx="35.5" cy="47" r="1.2" fill="#FFFFFF"/>
+            <ellipse cx="58" cy="52" rx="4" ry="2.5" fill="#FF8A8A"/>
+            <ellipse cx="31" cy="54" rx="4" ry="2.5" fill="#FF8A8A"/>
+            <path d="M 48 53 Q 43 58 38 53" stroke="#0F172A" stroke-width="2" stroke-linecap="round" fill="none"/>
 
             <!-- 앞쪽 작은 날개 (노즈콘) -->
-            <path d="M 175 52 L 195 54 L 175 56 Z" fill="#22C5EE"/>
+            <path d="M 25 52 L 5 54 L 25 56 Z" fill="#22C5EE"/>
           </svg>
         </span>
 
         <h1>국제운송 견적 문의</h1>
 
-        <!-- [오른쪽] 기존 컨테이너 캐릭터 -->
+        <!-- [오른쪽] 컨테이너 캐릭터 -->
         <span class="char-icon char-right">
           <svg width="110" height="60" viewBox="0 0 160 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- 발 -->
             <rect x="62" y="78" width="10" height="10" rx="4" fill="#093760"/>
             <rect x="88" y="78" width="10" height="10" rx="4" fill="#093760"/>
             
-            <!-- 왼쪽 팔 & 손 -->
             <path d="M 12 50 Q 4 54 4 60" stroke="#093760" stroke-width="4.5" stroke-linecap="round" fill="none"/>
             <circle cx="4" cy="60" r="4" fill="#093760"/>
 
-            <!-- 오른쪽 팔 & 손 -->
             <path d="M 148 50 Q 156 42 158 34" stroke="#093760" stroke-width="4.5" stroke-linecap="round" fill="none"/>
             <circle cx="158" cy="34" r="4" fill="#093760"/>
 
-            <!-- 컨테이너 몸체 -->
             <rect x="12" y="22" width="136" height="52" rx="4" fill="#0F4C81" stroke="#093760" stroke-width="2.5"/>
             
-            <!-- 코너 캐스팅 블록 -->
             <rect x="12" y="22" width="6" height="6" fill="#1E5C96"/>
             <rect x="142" y="22" width="6" height="6" fill="#1E5C96"/>
             <rect x="12" y="68" width="6" height="6" fill="#1E5C96"/>
             <rect x="142" y="68" width="6" height="6" fill="#1E5C96"/>
 
-            <!-- 골판지 세로 요철 라인 -->
             <line x1="28" y1="28" x2="28" y2="68" stroke="#1E5C96" stroke-width="2"/>
             <line x1="44" y1="28" x2="44" y2="68" stroke="#1E5C96" stroke-width="2"/>
             <line x1="60" y1="28" x2="60" y2="68" stroke="#1E5C96" stroke-width="2"/>
 
-            <!-- 문짝 구분선 및 잠금장치 -->
             <line x1="112" y1="22" x2="112" y2="74" stroke="#093760" stroke-width="2.5"/>
             <line x1="120" y1="34" x2="120" y2="62" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
             <circle cx="120" cy="33" r="2" fill="#FFFFFF"/>
@@ -250,11 +229,9 @@
             <circle cx="134" cy="33" r="2" fill="#FFFFFF"/>
             <circle cx="134" cy="63" r="2" fill="#FFFFFF"/>
 
-            <!-- WIDE SHIPPING 텍스트 레터링 -->
             <text x="20" y="49" fill="#FFFFFF" font-size="11" font-weight="900" font-family="sans-serif" letter-spacing="0.5">WIDE</text>
             <text x="20" y="61" fill="#FFFFFF" font-size="11" font-weight="900" font-family="sans-serif" letter-spacing="0.5">SHIPPING</text>
 
-            <!-- 중앙 얼굴 -->
             <circle cx="82" cy="45" r="5.5" fill="#FFFFFF"/>
             <circle cx="102" cy="45" r="5.5" fill="#FFFFFF"/>
             <circle cx="83.5" cy="45" r="2.8" fill="#1E293B"/>
@@ -266,7 +243,6 @@
             <ellipse cx="108.5" cy="51" rx="3" ry="1.8" fill="#F43F5E" opacity="0.7"/>
             <path d="M 88 50 Q 92 55 96 50" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" fill="none"/>
 
-            <!-- 상단 지붕 고정 장치 -->
             <path d="M 72 22 C 72 15, 88 15, 88 22 Z" fill="#FFFFFF"/>
             <rect x="69" y="20.5" width="22" height="2.5" rx="1" fill="#CBD5E1"/>
           </svg>
@@ -325,7 +301,6 @@
         <input id="etd" type="date">
       </div>
 
-      <!-- 추가 요청 서비스 선택 -->
       <div class="form-group full">
         <label>추가 요청 서비스 (필요시 선택)</label>
         <div class="service-grid">
