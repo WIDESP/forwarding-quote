@@ -160,36 +160,42 @@
     <div class="header-group">
       <div class="header-title-wrapper">
         
-        <!-- 비행기 캐릭터 SVG (왼쪽 조종석 하늘색 제거 및 눈/입/볼터치 우측 이동 완료) -->
+        <!-- 고품질 디테일 반영된 비행기 캐릭터 SVG -->
         <span class="char-icon char-left">
-          <svg width="120" height="75" viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- 배경 날개 -->
-            <path d="M 180 70 L 140 90 L 100 70 Z" fill="#38BDF8"/>
-            <!-- 메인 동체 -->
-            <path d="M 180 75 C 190 75 185 45 160 35 C 120 20 60 25 30 50 C 10 65 15 85 40 85 C 90 90 150 90 180 75 Z" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
-            <path d="M 180 75 C 150 90 90 90 40 85 C 15 85 10 65 30 50 C 60 75 120 85 180 75 Z" fill="#22C5EE"/>
+          <svg width="130" height="80" viewBox="0 0 220 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- 후면 날개 및 속도감 라인 -->
+            <path d="M 195 72 C 170 85 130 92 90 92 L 60 78" stroke="#38BDF8" stroke-width="6" stroke-linecap="round" fill="none" opacity="0.3"/>
+            <path d="M 12 62 L 28 60" stroke="#38BDF8" stroke-width="3" stroke-linecap="round" fill="none"/>
+
+            <!-- 메인 동체 (유선형 볼륨감 적용) -->
+            <path d="M 190 75 C 200 75 195 42 165 33 C 120 18 55 22 28 48 C 12 62 18 82 45 84 C 95 88 155 88 190 75 Z" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
             
-            <!-- 꼬리 날개 (왼쪽 배치 및 W 로고 정방향) -->
-            <path d="M 70 40 L 45 5 C 35 0 25 5 30 20 L 50 50 Z" fill="#22C5EE"/>
-            <text x="36" y="32" fill="#FFFFFF" font-family="sans-serif" font-weight="900" font-size="18">W</text>
+            <!-- 하단 하늘색 물결 볼륨 패스 -->
+            <path d="M 190 75 C 155 88 95 88 45 84 C 18 82 12 62 28 48 C 45 68 115 84 190 75 Z" fill="#22C5EE"/>
 
-            <!-- 기체 창문들 -->
-            <circle cx="130" cy="50" r="3.5" fill="#22C5EE"/>
-            <circle cx="115" cy="50" r="3.5" fill="#22C5EE"/>
-            <circle cx="100" cy="50" r="3.5" fill="#22C5EE"/>
-            <text x="74" y="66" fill="#0F4C81" font-family="sans-serif" font-weight="900" font-size="10">WIDE SHIPPING</text>
+            <!-- 꼬리 날개 (디테일한 곡선 및 W 로고) -->
+            <path d="M 74 38 C 72 25 60 8 48 3 C 40 -1 30 3 33 16 C 36 28 50 48 54 52 Z" fill="#22C5EE"/>
+            <text x="39" y="30" fill="#FFFFFF" font-family="sans-serif" font-weight="900" font-size="19" transform="rotate(-12 39 30)">W</text>
 
-            <!-- 얼굴 (눈, 볼터치, 미소 - 우측 앞머리 쪽으로 이동 완료) -->
-            <circle cx="160" cy="46" r="4" fill="#0F172A"/>
-            <circle cx="145" cy="48" r="4" fill="#0F172A"/>
-            <circle cx="158.5" cy="45" r="1.2" fill="#FFFFFF"/>
-            <circle cx="143.5" cy="47" r="1.2" fill="#FFFFFF"/>
-            <ellipse cx="166" cy="52" rx="4" ry="2.5" fill="#FF8A8A"/>
-            <ellipse cx="139" cy="54" rx="4" ry="2.5" fill="#FF8A8A"/>
-            <path d="M 156 53 Q 151 58 146 53" stroke="#0F172A" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <!-- 창문 및 텍스트 -->
+            <circle cx="138" cy="48" r="3.5" fill="#22C5EE"/>
+            <circle cx="122" cy="48" r="3.5" fill="#22C5EE"/>
+            <circle cx="106" cy="48" r="3.5" fill="#22C5EE"/>
+            <text x="75" y="66" fill="#0F4C81" font-family="sans-serif" font-weight="900" font-size="10.5" letter-spacing="0.2">WIDE SHIPPING</text>
 
-            <!-- 앞쪽 작은 날개 (노즈콘) -->
-            <path d="M 25 52 L 5 54 L 25 56 Z" fill="#22C5EE"/>
+            <!-- 오른쪽 앞머리 얼굴 (눈, 반짝이 하이라이트, 볼터치, 미소) -->
+            <circle cx="170" cy="44" r="4.2" fill="#0F172A"/>
+            <circle cx="153" cy="46" r="4.2" fill="#0F172A"/>
+            <circle cx="171.5" cy="42.8" r="1.4" fill="#FFFFFF"/>
+            <circle cx="154.5" cy="44.8" r="1.4" fill="#FFFFFF"/>
+            
+            <ellipse cx="177" cy="50.5" rx="4.5" ry="2.8" fill="#FF8A8A"/>
+            <ellipse cx="146" cy="52.5" rx="4.5" ry="2.8" fill="#FF8A8A"/>
+            
+            <path d="M 166 51 C 163 56 158 56 155 51" stroke="#0F172A" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+
+            <!-- 기체 앞쪽 노즈콘 뾰족한 포인트 날개 -->
+            <path d="M 28 48 L 12 51 L 28 54 Z" fill="#22C5EE"/>
           </svg>
         </span>
 
