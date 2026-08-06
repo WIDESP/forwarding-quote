@@ -49,6 +49,8 @@
 
   .char-left {
     animation-delay: 0s;
+    font-size: 40px; /* 이모지 크기 조절 */
+    line-height: 1;
   }
 
   .char-right {
@@ -170,45 +172,11 @@
   </div>
 
   <form id="quoteForm" class="card" onsubmit="event.preventDefault(); submitQuote();">
-    <!-- 헤더 타이틀 영역 (좌: 와래 / 우: 와박스) -->
+    <!-- 헤더 타이틀 영역 (좌: 🐳 / 우: 와박스) -->
     <div class="header-group">
       <div class="header-title-wrapper">
-        <!-- [왼쪽] 고래 캐릭터 (몸통, 꼬리, 물줄기, 선장모자 선명화) -->
-        <span class="char-icon char-left">
-          <svg width="68" height="60" viewBox="0 0 110 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- 시원한 물줄기 -->
-            <path d="M 46 22 Q 38 12 28 15" stroke="#38BDF8" stroke-width="3" stroke-linecap="round" fill="none"/>
-            <path d="M 50 20 L 50 8" stroke="#38BDF8" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-            <path d="M 54 22 Q 62 12 72 15" stroke="#38BDF8" stroke-width="3" stroke-linecap="round" fill="none"/>
-
-            <!-- 바다 파도 -->
-            <path d="M 5 78 Q 28 72 50 78 T 95 78" stroke="#38BDF8" stroke-width="4" stroke-linecap="round" fill="none"/>
-
-            <!-- 고래 몸통 & 생생한 꼬리 (좌측으로 넘실거리는 꼬리) -->
-            <path d="M 12 60 C 4 52 2 40 10 38 C 18 36 24 48 30 52 C 40 30 88 30 96 52 C 102 68 84 76 56 76 C 30 76 18 68 12 60 Z" fill="#0F4C81"/>
-            <path d="M 10 38 C 4 30 12 22 18 32 C 16 36 12 38 10 38 Z" fill="#093760"/>
-
-            <!-- 고래의 하얀 배 (라인) -->
-            <path d="M 32 58 C 38 71 80 71 88 56 C 78 65 42 65 32 58 Z" fill="#E0F2FE"/>
-
-            <!-- 가슴 지느러미 -->
-            <path d="M 48 62 C 40 66 38 72 44 74 C 48 72 50 66 52 63 Z" fill="#093760"/>
-
-            <!-- 눈 & 하이라이트 -->
-            <circle cx="74" cy="46" r="4.5" fill="#1E293B"/>
-            <circle cx="75.5" cy="44.5" r="1.5" fill="#FFFFFF"/>
-            
-            <!-- 발그레 볼터치 -->
-            <ellipse cx="83" cy="51" rx="4" ry="2.5" fill="#F43F5E" opacity="0.8"/>
-            
-            <!-- 방긋 미소 -->
-            <path d="M 68 52 Q 73 57 77 52" stroke="#0F4C81" stroke-width="2" stroke-linecap="round" fill="none"/>
-
-            <!-- 선장 모자 -->
-            <path d="M 44 29 L 62 29 L 60 24 L 46 24 Z" fill="#1E293B"/>
-            <rect x="40" y="28" width="26" height="2.5" rx="1" fill="#F59E0B"/>
-          </svg>
-        </span>
+        <!-- [왼쪽] 고래 이모지 -->
+        <span class="char-icon char-left">🐳</span>
 
         <h1>국제운송 견적 문의</h1>
 
