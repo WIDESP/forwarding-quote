@@ -131,6 +131,35 @@
     .btn-del-row { position: absolute; right: 0; bottom: 8px; width: 100%; height: 32px; font-size: 13px; }
     .card { padding: 24px 18px; }
   }
+  /* 제목 캐릭터 애니메이션 및 레이아웃 */
+  .header-title-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .char-icon {
+    font-size: 32px;
+    user-select: none;
+    display: inline-block;
+    animation: floatChar 2s ease-in-out infinite alternate;
+  }
+
+  /* 좌우 캐릭터 둥실둥실 애니메이션 */
+  .char-left {
+    animation-delay: 0s;
+  }
+
+  .char-right {
+    animation-delay: 0.5s;
+  }
+
+  @keyframes floatChar {
+    0% { transform: translateY(0px) rotate(-5deg); }
+    100% { transform: translateY(-6px) rotate(5deg); }
+  }
 </style>
 </head>
 <body>
