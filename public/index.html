@@ -35,7 +35,8 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 20px;
+    gap: 16px;
+    margin-bottom: 8px;
   }
 
   .char-icon {
@@ -45,9 +46,10 @@
     user-select: none;
     animation: floatChar 3s ease-in-out infinite;
   }
-
-  .char-left { animation-delay: 0s; }
-  .char-right { animation-delay: 1.5s; }
+  .char-left { animation-delay: 0s; width: 130px; height: 70px; }
+  .char-left img { width: 100%; height: 100%; object-fit: contain; }
+  .char-right { animation-delay: 1.5s; width: 90px; height: 50px; }
+  .char-right img { width: 100%; height: 100%; object-fit: contain; }
 
   @keyframes floatChar {
     0%, 100% { transform: translateY(0); }
@@ -160,43 +162,9 @@
     <div class="header-group">
       <div class="header-title-wrapper">
         
-        <!-- 원본 비행기 캐릭터를 정교하게 리터치한 고품질 SVG -->
+        <!-- [왼쪽] 원본 비행기 이미지 고정 (비율 유지) -->
         <span class="char-icon char-left">
-          <svg width="140" height="84" viewBox="0 0 280 168" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- 1. 뒷날개 (하늘색) -->
-            <path d="M 35 105 L 15 110 L 35 115 Z" fill="#38BDF8"/>
-            
-            <!-- 2. 메인 하단 큰 날개 및 동체 하단 곡선 (원본의 볼륨감 그대로) -->
-            <path d="M 230 110 C 200 135 110 135 55 125 C 25 120 15 95 40 85 C 95 85 180 95 230 110 Z" fill="#38BDF8"/>
-            <path d="M 230 110 C 190 128 100 128 50 120 C 30 115 22 100 38 92 C 85 90 170 98 230 110 Z" fill="#0EA5E9"/>
-
-            <!-- 3. 메인 동체 흰색 바디 -->
-            <path d="M 235 105 C 248 105 240 60 200 48 C 145 28 70 32 35 68 C 12 90 20 115 55 118 C 115 125 195 120 235 105 Z" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2.5"/>
-
-            <!-- 4. 꼬리 날개 (W 로고 포함, 원본 비율) -->
-            <path d="M 90 60 L 55 8 C 42 2 30 8 38 25 L 62 72 Z" fill="#38BDF8"/>
-            <text x="44" y="46" fill="#FFFFFF" font-family="sans-serif" font-weight="900" font-size="24" transform="rotate(-15 44 46)">W</text>
-
-            <!-- 5. 창문 콕핏들 (가운데 점 3개 및 WIDE SHIPPING 텍스트) -->
-            <circle cx="110" cy="72" r="4.5" fill="#38BDF8"/>
-            <circle cx="130" cy="72" r="4.5" fill="#38BDF8"/>
-            <circle cx="150" cy="72" r="4.5" fill="#38BDF8"/>
-            <text x="92" y="98" fill="#0F4C81" font-family="sans-serif" font-weight="900" font-size="13" letter-spacing="0.5">WIDE SHIPPING</text>
-
-            <!-- 6. 우측 앞머리로 이동한 얼굴 (눈, 하이라이트, 볼터치, 미소) -->
-            <circle cx="212" cy="65" r="5.5" fill="#0F172A"/>
-            <circle cx="188" cy="68" r="5.5" fill="#0F172A"/>
-            <circle cx="214" cy="63.5" r="1.8" fill="#FFFFFF"/>
-            <circle cx="190" cy="66.5" r="1.8" fill="#FFFFFF"/>
-            
-            <ellipse cx="221" cy="74" rx="6" ry="3.8" fill="#FF8A8A"/>
-            <ellipse cx="180" cy="77" rx="6" ry="3.8" fill="#FF8A8A"/>
-            
-            <path d="M 206 73 C 202 80 196 80 192 73" stroke="#0F172A" stroke-width="3" stroke-linecap="round" fill="none"/>
-
-            <!-- 7. 앞쪽 노즈 포인트 작은 날개 -->
-            <path d="M 38 72 L 15 75 L 38 78 Z" fill="#38BDF8"/>
-          </svg>
+          <img src="https://i.ibb.co/6RzYtG5/airplane.png" alt="비행기 캐릭터" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'140\' height=\'80\'><rect width=\'100%\' height=\'100%\' fill=\'%23e2e8f0\'/><text x=\'50%\' y=\'50%\' font-size=\'12\' fill=\'%2364748b\' text-anchor=\'middle\' dominant-baseline=\'middle\'>Airplane</text></svg>'">
         </span>
 
         <h1>국제운송 견적 문의</h1>
