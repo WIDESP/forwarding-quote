@@ -272,8 +272,14 @@
     const selectedMode = document.querySelector('input[name="mode"]:checked').value;
     const isFcl = document.getElementById('m_fcl').checked;
 
-    // FCL이 아닐 때(LCL/항공)는 '해당없음'으로 표시되도록 조치
     const fclTypeValue = isFcl ? document.getElementById('fcl_type').value : '해당없음(LCL/Air)';
+
+    // 사이즈 값 가져오기
+    const w = document.getElementById('dim_w').value || '0';
+    const l = document.getElementById('dim_l').value || '0';
+    const h = document.getElementById('dim_h').value || '0';
+    const q = document.getElementById('dim_q').value || '0';
+    const dimensionsFormatted = isFcl ? '해당없음' : `${w}cm x ${l}cm x ${h}cm (${q}EA)`;
 
     const templateParams = {
       company: document.getElementById('company').value,
@@ -286,6 +292,7 @@
       inc: document.getElementById('inc').value,
       cargo: document.getElementById('cargo').value,
       fcl_type: fclTypeValue,
+      dimensions: dimensionsFormatted, // 가로x세로x높이(수량) 텍스트
       cbm: document.getElementById('cbm') ? (document.getElementById('cbm').value || '0') : '0',
       weight: document.getElementById('weight') ? (document.getElementById('weight').value || '0') : '0',
       memo: document.getElementById('memo').value || '없음'
