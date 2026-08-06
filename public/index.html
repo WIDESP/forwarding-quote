@@ -15,6 +15,7 @@
     --text-main: #1E293B;
     --text-sub: #64748B;
     --card-bg: #FFFFFF;
+    --danger: #EF4444;
   }
   
   * { box-sizing: border-box; font-family: "Pretendard", -apple-system, sans-serif; }
@@ -58,9 +59,22 @@
   }
   input:focus, select:focus, textarea:focus { border-color: var(--border-focus); box-shadow: 0 0 0 3px rgba(15,76,129,0.12); }
   
-  /* CBM 자동 계산 박스 */
+  /* CBM 자동 계산 박스 및 행 추가 버튼 */
   .cbm-box { background: #F8FAFC; border: 1.5px dashed #CBD5E1; border-radius: 12px; padding: 20px; margin-top: 12px; }
-  .cbm-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .cbm-row { display: grid; grid-template-columns: repeat(4, 1fr) 40px; gap: 8px; margin-bottom: 8px; align-items: end; }
+  
+  .btn-add-row {
+    background: #E2E8F0; color: #334155; border: none; padding: 10px 14px;
+    border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; transition: all 0.2s; margin-top: 6px;
+  }
+  .btn-add-row:hover { background: #CBD5E1; }
+
+  .btn-del-row {
+    background: #FEE2E2; color: var(--danger); border: 1px solid #FCA5A5;
+    border-radius: 8px; height: 44px; font-size: 16px; font-weight: 700; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .btn-del-row:hover { background: #FCA5A5; color: #FFF; }
   
   /* 포트 자동완성 드롭다운 */
   .autocomplete-wrapper { position: relative; }
@@ -80,7 +94,8 @@
 
   @media (max-width: 640px) {
     .grid { grid-template-columns: 1fr; }
-    .cbm-grid { grid-template-columns: 1fr 1fr; }
+    .cbm-row { grid-template-columns: repeat(2, 1fr); position: relative; padding-bottom: 40px; border-bottom: 1px solid #E2E8F0; }
+    .btn-del-row { position: absolute; right: 0; bottom: 8px; width: 100%; height: 32px; font-size: 13px; }
     .card { padding: 24px 18px; }
   }
 </style>
@@ -163,19 +178,27 @@
         </select>
       </div>
       
-      <!-- LCL / 항공 조건 시 CBM 자동 계산 박스 노출 -->
+      <!-- LCL / 항공 조건 시 동적 CBM 계산 박스 -->
       <div id="lcl-spec" class="full" style="display:none;">
         <div class="cbm-box">
-          <label style="color:#0F4C81; margin-bottom:12px;">📏 화물 사이즈 직접 입력 (CBM 실시간 자동 계산)</label>
-          <div class="cbm-grid">
-            <div class="form-group"><label>가로(cm)</label><input id="dim_w" type="number" placeholder="100" oninput="calcCbm()"></div>
-            <div class="form-group"><label>세로(cm)</label><input id="dim_l" type="number" placeholder="100" oninput="calcCbm()"></div>
-            <div class="form-group"><label>높이(cm)</label><input id="dim_h" type="number" placeholder="100" oninput="calcCbm()"></div>
-            <div class="form-group"><label>상자수량(EA)</label><input id="dim_q" type="number" value="1" oninput="calcCbm()"></div>
+          <label style="color:#0F4C81; margin-bottom:12px; display:block;">📏 화물 사이즈 직접 입력 (다중 규격 추가 가능)</label>
+          
+          <!-- 화물 규격 행 컨테이너 -->
+          <div id="dim-container">
+            <div class="cbm-row">
+              <div class="form-group"><label>가로(cm)</label><input class="dim_w" type="number" placeholder="100" oninput="calcCbm()"></div>
+              <div class="form-group"><label>세로(cm)</label><input class="dim_l" type="number" placeholder="100" oninput="calcCbm()"></div>
+              <div class="form-group"><label>높이(cm)</label><input class="dim_h" type="number" placeholder="100" oninput="calcCbm()"></div>
+              <div class="form-group"><label>수량(EA)</label><input class="dim_q" type="number" value="1" oninput="calcCbm()"></div>
+              <div></div> <!-- 첫 행 삭제버튼 공백 -->
+            </div>
           </div>
-          <div class="grid" style="margin-top: 14px;">
+
+          <button type="button" class="btn-add-row" onclick="addDimRow()">+ 화물 규격 추가</button>
+
+          <div class="grid" style="margin-top: 16px;">
             <div class="form-group">
-              <label>총 부피 (CBM)</label>
+              <label>총 부피 (합산 CBM)</label>
               <input id="cbm" type="number" step="0.001" placeholder="0.000" readonly style="background:#F1F5F9; font-weight:700; color:var(--primary);">
             </div>
             <div class="form-group">
@@ -250,51 +273,78 @@
   setupAutocomplete('origin', 'origin-list');
   setupAutocomplete('dest', 'dest-list');
 
-  // 3. CBM 실시간 계산 logic
-  function calcCbm() {
-    const w = Number(document.getElementById('dim_w').value) || 0;
-    const l = Number(document.getElementById('dim_l').value) || 0;
-    const h = Number(document.getElementById('dim_h').value) || 0;
-    const q = Number(document.getElementById('dim_q').value) || 1;
-    const cbm = (w * l * h * q) / 1000000;
-    document.getElementById('cbm').value = cbm > 0 ? cbm.toFixed(3) : '';
+  // 3. 다중 화물 행 추가 / 삭제
+  function addDimRow() {
+    const container = document.getElementById('dim-container');
+    const newRow = document.createElement('div');
+    newRow.className = 'cbm-row';
+    newRow.innerHTML = `
+      <div class="form-group"><input class="dim_w" type="number" placeholder="가로" oninput="calcCbm()"></div>
+      <div class="form-group"><input class="dim_l" type="number" placeholder="세로" oninput="calcCbm()"></div>
+      <div class="form-group"><input class="dim_h" type="number" placeholder="높이" oninput="calcCbm()"></div>
+      <div class="form-group"><input class="dim_q" type="number" value="1" oninput="calcCbm()"></div>
+      <button type="button" class="btn-del-row" onclick="removeDimRow(this)">✕</button>
+    `;
+    container.appendChild(newRow);
   }
 
-  // 4. 운송 방식에 따른 UI 전환
+  function removeDimRow(btn) {
+    btn.parentElement.remove();
+    calcCbm();
+  }
+
+  // 4. 합산 CBM 실시간 계산 logic
+  function calcCbm() {
+    const rows = document.querySelectorAll('.cbm-row');
+    let totalCbm = 0;
+
+    rows.forEach(row => {
+      const w = Number(row.querySelector('.dim_w').value) || 0;
+      const l = Number(row.querySelector('.dim_l').value) || 0;
+      const h = Number(row.querySelector('.dim_h').value) || 0;
+      const q = Number(row.querySelector('.dim_q').value) || 1;
+      
+      totalCbm += (w * l * h * q) / 1000000;
+    });
+
+    document.getElementById('cbm').value = totalCbm > 0 ? totalCbm.toFixed(3) : '';
+  }
+
+  // 5. 운송 방식에 따른 UI 전환
   function toggleMode() {
     const isFcl = document.getElementById('m_fcl').checked;
     document.getElementById('fcl-spec').style.display = isFcl ? 'flex' : 'none';
     document.getElementById('lcl-spec').style.display = isFcl ? 'none' : 'block';
   }
 
-  // 5. 견적 문의 제출 및 EmailJS 이메일 발송
+  // 6. 견적 문의 제출 및 EmailJS 이메일 발송
   async function submitQuote() {
     const selectedMode = document.querySelector('input[name="mode"]:checked').value;
     const isFcl = document.getElementById('m_fcl').checked;
 
     const fclTypeValue = isFcl ? document.getElementById('fcl_type').value : '해당없음(LCL/Air)';
 
-    // 사이즈 정보 조합 logic
-    const w = document.getElementById('dim_w').value;
-    const l = document.getElementById('dim_l').value;
-    const h = document.getElementById('dim_h').value;
-    const q = document.getElementById('dim_q').value || '1';
-
-    let dimensionsFormatted = '미입력';
+    // 여러 규격 정보 텍스트로 합치기 logic
+    let dimList = [];
     if (!isFcl) {
-      if (w && l && h) {
-        dimensionsFormatted = `${w}*${l}*${h}cm (${q}EA)`;
-      } else {
-        dimensionsFormatted = '미입력';
-      }
-    } else {
-      dimensionsFormatted = '해당없음(FCL)';
+      const rows = document.querySelectorAll('.cbm-row');
+      rows.forEach(row => {
+        const w = row.querySelector('.dim_w').value;
+        const l = row.querySelector('.dim_l').value;
+        const h = row.querySelector('.dim_h').value;
+        const q = row.querySelector('.dim_q').value || '1';
+
+        if (w && l && h) {
+          dimList.push(`${w}*${l}*${h}cm (${q}EA)`);
+        }
+      });
     }
 
+    const dimensionsFormatted = dimList.length > 0 ? dimList.join(', ') : '미입력';
     const cbmVal = document.getElementById('cbm') ? (document.getElementById('cbm').value || '0') : '0';
     const weightVal = document.getElementById('weight') ? (document.getElementById('weight').value || '0') : '0';
 
-    // 메일에 부피 / 중량 / 규격을 한번에 보내는 변수
+    // 메일 전송용 최종 문구 생성
     const lclAirInfo = isFcl 
       ? '해당없음(FCL)' 
       : `${cbmVal} CBM / ${weightVal} kg / ${dimensionsFormatted}`;
@@ -313,7 +363,7 @@
       dimensions: dimensionsFormatted,
       cbm: cbmVal,
       weight: weightVal,
-      lcl_info: lclAirInfo, // 부피/중량/규격 합침 변수
+      lcl_info: lclAirInfo,
       memo: document.getElementById('memo').value || '없음'
     };
 
