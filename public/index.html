@@ -363,18 +363,6 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script type="text/javascript">
-  // 사용자가 업로드한 이미지를 브라우저 메모리에 임시 URL로 변환하여 즉시 반영
-  const uploadedImageUrl = URL.createObjectURL(new Blob([], { type: 'image/jpeg' }));
-  // 만약 실제 파일 객체나 base64 링크가 있다면 교체 가능하도록 설정
-  document.getElementById('userCharImg').src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='90'><rect width='100%_height='100%' fill='%230F4C81'/><text x='50%' y='50%' fill='%23fff' font-size='12' text-anchor='middle' dominant-baseline='middle'>컨테이너 캐릭터</text></svg>";
-
-  // 실제 업로드된 이미지를 소스로 즉시 세팅 (사용자가 제공한 이미지 파일을 Data URL로 반영)
-  const reader = new FileReader();
-  // 편의를 위해 방금 전송된 이미지 데이터를 활용할 수 있도록 img src 직접 세팅 코드 보완
-  document.getElementById('userCharImg').src = ""; // 이곳에 실제 이미지 데이터가 들어갑니다.
-</script>
-
-<script type="text/javascript">
   (function() {
     emailjs.init("AZNplwsjRX-VEjTqg");
   })();
