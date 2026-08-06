@@ -174,258 +174,264 @@
     <div class="header-group">
       <div class="header-title-wrapper">
       <!-- [왼쪽] 와이드해운 비행기 캐릭터 SVG -->
-<span class="char-icon char-left" aria-label="와이드해운 비행기 캐릭터">
+<span class="char-icon char-left">
   <svg
     width="150"
-    height="90"
-    viewBox="0 0 560 360"
-    fill="none"
+    height="85"
+    viewBox="0 0 420 240"
     xmlns="http://www.w3.org/2000/svg"
     role="img"
-    aria-labelledby="planeTitle"
+    aria-label="WIDE SHIPPING 비행기 캐릭터"
   >
-    <title id="planeTitle">와이드해운 비행기 캐릭터</title>
+    <defs>
+      <linearGradient id="planeBlue" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#38BDF8"/>
+        <stop offset="100%" stop-color="#0796D8"/>
+      </linearGradient>
+
+      <linearGradient id="wingBlue" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#35BDF5"/>
+        <stop offset="100%" stop-color="#078DD1"/>
+      </linearGradient>
+
+      <linearGradient id="windowBlue" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#62D2FA"/>
+        <stop offset="100%" stop-color="#2AADE5"/>
+      </linearGradient>
+    </defs>
 
     <!-- 꼬리날개 -->
     <path
-      d="M390 105
-         C420 65 438 42 468 35
-         C490 30 505 39 502 60
-         L495 145
-         L410 165 Z"
-      fill="#0F4C81"
+      d="M112 86
+         L95 25
+         Q92 12 104 10
+         L125 10
+         Q137 10 143 23
+         L160 72
+         Z"
+      fill="url(#planeBlue)"
     />
 
-    <!-- 꼬리 로고 W -->
+    <!-- 꼬리 W -->
+    <text
+      x="105"
+      y="54"
+      font-family="Arial, sans-serif"
+      font-size="25"
+      font-weight="900"
+      fill="#FFFFFF"
+    >W</text>
+
+    <!-- 뒤쪽 작은 날개 -->
     <path
-      d="M455 66
-         L468 104
-         L480 72
-         L491 105
-         L497 69"
-      stroke="white"
-      stroke-width="10"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      d="M105 103
+         L48 98
+         Q39 97 37 103
+         Q35 109 47 111
+         L111 113
+         Z"
+      fill="url(#wingBlue)"
     />
 
-    <!-- 비행기 본체 -->
+    <!-- 메인 비행기 몸체 -->
     <path
-      d="M80 150
-         C95 105 145 82 215 82
-         L380 82
-         C430 82 472 105 490 145
-         L505 180
-         C514 200 500 220 478 220
-         L165 220
-         C110 220 70 195 80 150Z"
-      fill="white"
-      stroke="#D5DEE8"
-      stroke-width="4"
+      d="M70 112
+         Q70 72 118 57
+         Q172 39 263 46
+         Q323 50 351 83
+         Q368 103 366 126
+         Q365 151 339 166
+         Q307 185 235 187
+         L130 187
+         Q80 184 70 153
+         Q65 135 70 112
+         Z"
+      fill="#FFFFFF"
     />
 
-    <!-- 파란 하부 -->
+    <!-- 하단 파란색 바디 -->
     <path
-      d="M82 183
-         C120 211 160 224 220 225
-         L470 225
-         C492 225 510 210 505 193
-         C470 211 425 215 375 215
-         L170 215
-         C132 214 102 202 82 183Z"
-      fill="#0F4C81"
+      d="M69 145
+         Q91 167 136 171
+         Q230 180 313 160
+         Q344 152 365 130
+         Q365 157 339 171
+         Q306 190 235 192
+         L130 190
+         Q82 187 70 157
+         Z"
+      fill="url(#planeBlue)"
     />
 
     <!-- 조종석 -->
     <path
-      d="M105 145
-         C115 108 155 94 200 94
-         C235 94 265 110 275 145
-         C279 159 270 171 254 171
-         L130 171
-         C111 171 100 159 105 145Z"
-      fill="#7DD3FC"
-      stroke="#0284C7"
-      stroke-width="4"
+      d="M284 62
+         Q318 63 337 84
+         Q346 94 349 105
+         L281 105
+         Q277 83 284 62
+         Z"
+      fill="url(#windowBlue)"
     />
 
-    <!-- 조종석 하이라이트 -->
+    <!-- 조종석 반사 -->
     <path
-      d="M122 134
-         C135 112 160 105 190 105"
-      stroke="#BAE6FD"
-      stroke-width="8"
+      d="M291 66 Q296 70 300 101"
+      stroke="#A7E6FC"
+      stroke-width="5"
       stroke-linecap="round"
-      opacity=".8"
+      opacity="0.8"
     />
 
     <!-- 창문 -->
-    <rect x="310" y="111" width="17" height="35" rx="8.5" fill="#172B4D"/>
-    <rect x="338" y="111" width="17" height="35" rx="8.5" fill="#172B4D"/>
-    <rect x="366" y="111" width="17" height="35" rx="8.5" fill="#172B4D"/>
-    <rect x="394" y="112" width="17" height="34" rx="8.5" fill="#172B4D"/>
-    <rect x="422" y="116" width="17" height="32" rx="8.5" fill="#172B4D"/>
-
-    <!-- 눈 왼쪽 -->
-    <ellipse cx="155" cy="146" rx="24" ry="30" fill="white"/>
-    <ellipse cx="158" cy="150" rx="13" ry="18" fill="#172B4D"/>
-    <circle cx="162" cy="143" r="5" fill="white"/>
-
-    <!-- 눈 오른쪽 -->
-    <ellipse cx="215" cy="146" rx="24" ry="30" fill="white"/>
-    <ellipse cx="218" cy="150" rx="13" ry="18" fill="#172B4D"/>
-    <circle cx="222" cy="143" r="5" fill="white"/>
-
-    <!-- 눈썹 -->
-    <path
-      d="M138 116 Q153 106 168 115"
-      stroke="#172B4D"
-      stroke-width="7"
-      stroke-linecap="round"
-    />
-    <path
-      d="M198 115 Q213 106 228 116"
-      stroke="#172B4D"
-      stroke-width="7"
-      stroke-linecap="round"
-    />
-
-    <!-- 볼 -->
-    <ellipse cx="130" cy="174" rx="15" ry="9" fill="#FF7777"/>
-    <ellipse cx="240" cy="174" rx="15" ry="9" fill="#FF7777"/>
-
-    <!-- 웃는 입 -->
-    <path
-      d="M170 166
-         Q190 193 215 166
-         Q207 201 190 201
-         Q176 199 170 166Z"
-      fill="#7F1D1D"
-    />
-
-    <!-- 혀 -->
-    <ellipse cx="192" cy="191" rx="12" ry="6" fill="#FF7777"/>
-
-    <!-- 왼쪽 날개 -->
-    <path
-      d="M275 202
-         C220 210 155 225 92 247
-         C70 254 57 247 66 232
-         C87 198 142 181 245 177Z"
-      fill="white"
-      stroke="#D5DEE8"
-      stroke-width="4"
-    />
-
-    <!-- 오른쪽 날개 -->
-    <path
-      d="M300 200
-         C370 202 445 211 518 225
-         C535 229 540 239 525 244
-         C460 251 384 242 310 224Z"
-      fill="white"
-      stroke="#D5DEE8"
-      stroke-width="4"
-    />
-
-    <!-- 왼쪽 엔진 -->
-    <ellipse cx="105" cy="239" rx="42" ry="37" fill="#0F4C81"/>
-    <ellipse cx="105" cy="239" rx="30" ry="30" fill="#CBD5E1"/>
-    <ellipse cx="105" cy="239" rx="24" ry="24" fill="#172B4D"/>
-
-    <!-- 왼쪽 엔진 팬 -->
-    <path
-      d="M105 216 L111 237 L126 229
-         M128 245 L108 242 L116 260
-         M99 263 L101 242 L84 251
-         M81 233 L101 237 L94 218"
-      stroke="#64748B"
-      stroke-width="5"
-      stroke-linecap="round"
-    />
-    <circle cx="105" cy="239" r="5" fill="#CBD5E1"/>
-
-    <!-- 오른쪽 엔진 -->
-    <ellipse cx="315" cy="245" rx="42" ry="37" fill="#0F4C81"/>
-    <ellipse cx="315" cy="245" rx="30" ry="30" fill="#CBD5E1"/>
-    <ellipse cx="315" cy="245" rx="24" ry="24" fill="#172B4D"/>
-
-    <!-- 오른쪽 엔진 팬 -->
-    <path
-      d="M315 222 L321 243 L336 235
-         M338 251 L318 248 L326 266
-         M309 269 L311 248 L294 257
-         M291 239 L311 243 L304 224"
-      stroke="#64748B"
-      stroke-width="5"
-      stroke-linecap="round"
-    />
-    <circle cx="315" cy="245" r="5" fill="#CBD5E1"/>
-
-    <!-- 오른팔 -->
-    <path
-      d="M405 190
-         C420 180 438 185 446 198
-         L453 211"
-      stroke="#0F4C81"
-      stroke-width="16"
-      stroke-linecap="round"
-    />
-
-    <!-- 오른손 -->
-    <circle cx="451" cy="213" r="15" fill="white" stroke="#D5DEE8" stroke-width="3"/>
-
-    <!-- 왼팔 -->
-    <path
-      d="M87 156
-         C55 145 43 123 39 101"
-      stroke="#0F4C81"
-      stroke-width="16"
-      stroke-linecap="round"
-    />
-
-    <!-- 왼손 -->
-    <circle cx="37" cy="91" r="17" fill="white" stroke="#D5DEE8" stroke-width="3"/>
-
-    <!-- 손가락 -->
-    <path
-      d="M25 82 L20 70
-         M34 78 L31 64
-         M43 79 L46 65
-         M50 85 L57 73"
-      stroke="white"
-      stroke-width="8"
-      stroke-linecap="round"
-    />
+    <ellipse cx="155" cy="86" rx="7" ry="11" fill="#27B0E9"/>
+    <ellipse cx="179" cy="82" rx="7" ry="11" fill="#27B0E9"/>
+    <ellipse cx="203" cy="79" rx="7" ry="11" fill="#27B0E9"/>
+    <ellipse cx="227" cy="77" rx="7" ry="11" fill="#27B0E9"/>
+    <ellipse cx="251" cy="77" rx="7" ry="11" fill="#27B0E9"/>
 
     <!-- WIDE SHIPPING -->
     <text
-      x="285"
-      y="177"
-      fill="#0F4C81"
-      font-size="20"
-      font-weight="800"
+      x="145"
+      y="122"
       font-family="Arial, sans-serif"
-    >
-      WIDE SHIPPING
-    </text>
+      font-size="17"
+      font-weight="900"
+      letter-spacing="0.3"
+      fill="#078DD1"
+    >WIDE SHIPPING</text>
 
-    <!-- 앞부분 -->
-    <path
-      d="M478 180
-         C505 179 525 181 538 187
-         C525 194 505 196 480 194Z"
-      fill="#E2E8F0"
+    <!-- 얼굴 눈 -->
+    <circle cx="294" cy="120" r="7" fill="#172033"/>
+    <circle cx="331" cy="120" r="7" fill="#172033"/>
+
+    <!-- 눈 하이라이트 -->
+    <circle cx="296" cy="118" r="2" fill="#FFFFFF"/>
+    <circle cx="333" cy="118" r="2" fill="#FFFFFF"/>
+
+    <!-- 볼터치 -->
+    <ellipse
+      cx="278"
+      cy="137"
+      rx="9"
+      ry="6"
+      fill="#FF8585"
     />
 
-    <!-- 바닥 그림자 -->
     <ellipse
-      cx="285"
-      cy="286"
-      rx="190"
+      cx="348"
+      cy="137"
+      rx="9"
+      ry="6"
+      fill="#FF8585"
+    />
+
+    <!-- 웃는 입 -->
+    <path
+      d="M306 133
+         Q313 143 321 133"
+      stroke="#172033"
+      stroke-width="4"
+      stroke-linecap="round"
+      fill="none"
+    />
+
+    <!-- 앞쪽 메인 날개 -->
+    <path
+      d="M193 155
+         Q150 158 92 170
+         L34 187
+         Q24 190 28 196
+         Q31 201 43 199
+         L213 178
+         Z"
+      fill="url(#wingBlue)"
+    />
+
+    <!-- 엔진 1 -->
+    <ellipse
+      cx="137"
+      cy="183"
+      rx="27"
+      ry="18"
+      fill="#078DD1"
+    />
+
+    <ellipse
+      cx="137"
+      cy="184"
+      rx="17"
+      ry="17"
+      fill="#D9F4FF"
+    />
+
+    <ellipse
+      cx="137"
+      cy="184"
+      rx="12"
       ry="12"
-      fill="#CBD5E1"
-      opacity=".35"
+      fill="#2A6C91"
+    />
+
+    <ellipse
+      cx="137"
+      cy="184"
+      rx="6"
+      ry="8"
+      fill="#164C6B"
+    />
+
+    <!-- 엔진 2 -->
+    <ellipse
+      cx="319"
+      cy="170"
+      rx="24"
+      ry="17"
+      fill="#078DD1"
+    />
+
+    <ellipse
+      cx="319"
+      cy="170"
+      rx="15"
+      ry="15"
+      fill="#D9F4FF"
+    />
+
+    <ellipse
+      cx="319"
+      cy="170"
+      rx="10"
+      ry="10"
+      fill="#2A6C91"
+    />
+
+    <ellipse
+      cx="319"
+      cy="170"
+      rx="5"
+      ry="7"
+      fill="#164C6B"
+    />
+
+    <!-- 앞쪽 코 -->
+    <path
+      d="M360 126
+         Q380 122 394 127
+         Q382 135 360 132
+         Z"
+      fill="url(#planeBlue)"
+    />
+
+    <!-- 꼬리 수평날개 -->
+    <path
+      d="M104 91
+         L55 87
+         Q45 86 42 92
+         Q41 98 52 99
+         L108 100
+         Z"
+      fill="#0A9DDA"
     />
   </svg>
 </span>
