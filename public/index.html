@@ -173,24 +173,260 @@
     <!-- 헤더 타이틀 영역 (좌: 비행기 캐릭터 이미지 / 우: 컨테이너 캐릭터 SVG) -->
     <div class="header-group">
       <div class="header-title-wrapper">
-        <!-- [왼쪽] 귀여운 비행기 캐릭터 SVG -->
-<span class="char-icon char-left">
-  <svg width="55" height="52" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <!-- 비행기 몸체 -->
-    <ellipse cx="50" cy="50" rx="35" ry="22" fill="#38BDF8" stroke="#0284C7" stroke-width="4"/>
-    <!-- 창문 -->
-    <circle cx="58" cy="45" r="7" fill="#FFFFFF" stroke="#0284C7" stroke-width="3"/>
-    <circle cx="58" cy="45" r="2.5" fill="#0F172A"/>
-    <!-- 날개 -->
-    <path d="M 40 28 L 55 10 L 68 28 Z" fill="#0EA5E9" stroke="#0284C7" stroke-width="3" stroke-linejoin="round"/>
+      <!-- [왼쪽] 와이드해운 비행기 캐릭터 SVG -->
+<span class="char-icon char-left" aria-label="와이드해운 비행기 캐릭터">
+  <svg
+    width="150"
+    height="90"
+    viewBox="0 0 560 360"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    role="img"
+    aria-labelledby="planeTitle"
+  >
+    <title id="planeTitle">와이드해운 비행기 캐릭터</title>
+
     <!-- 꼬리날개 -->
-    <path d="M 20 40 L 10 24 L 28 32 Z" fill="#0EA5E9" stroke="#0284C7" stroke-width="3" stroke-linejoin="round"/>
-    <!-- 코 (앞부분) -->
-    <path d="M 80 50 C 85 50, 92 48, 95 50 C 92 52, 85 50, 80 50 Z" fill="#0284C7"/>
-    <!-- 미소 띤 입 -->
-    <path d="M 68 58 Q 74 63 78 57" stroke="#0F172A" stroke-width="3" stroke-linecap="round" fill="none"/>
-    <!-- 볼터치 -->
-    <ellipse cx="65" cy="53" rx="4" ry="2.5" fill="#F43F5E" opacity="0.7"/>
+    <path
+      d="M390 105
+         C420 65 438 42 468 35
+         C490 30 505 39 502 60
+         L495 145
+         L410 165 Z"
+      fill="#0F4C81"
+    />
+
+    <!-- 꼬리 로고 W -->
+    <path
+      d="M455 66
+         L468 104
+         L480 72
+         L491 105
+         L497 69"
+      stroke="white"
+      stroke-width="10"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+
+    <!-- 비행기 본체 -->
+    <path
+      d="M80 150
+         C95 105 145 82 215 82
+         L380 82
+         C430 82 472 105 490 145
+         L505 180
+         C514 200 500 220 478 220
+         L165 220
+         C110 220 70 195 80 150Z"
+      fill="white"
+      stroke="#D5DEE8"
+      stroke-width="4"
+    />
+
+    <!-- 파란 하부 -->
+    <path
+      d="M82 183
+         C120 211 160 224 220 225
+         L470 225
+         C492 225 510 210 505 193
+         C470 211 425 215 375 215
+         L170 215
+         C132 214 102 202 82 183Z"
+      fill="#0F4C81"
+    />
+
+    <!-- 조종석 -->
+    <path
+      d="M105 145
+         C115 108 155 94 200 94
+         C235 94 265 110 275 145
+         C279 159 270 171 254 171
+         L130 171
+         C111 171 100 159 105 145Z"
+      fill="#7DD3FC"
+      stroke="#0284C7"
+      stroke-width="4"
+    />
+
+    <!-- 조종석 하이라이트 -->
+    <path
+      d="M122 134
+         C135 112 160 105 190 105"
+      stroke="#BAE6FD"
+      stroke-width="8"
+      stroke-linecap="round"
+      opacity=".8"
+    />
+
+    <!-- 창문 -->
+    <rect x="310" y="111" width="17" height="35" rx="8.5" fill="#172B4D"/>
+    <rect x="338" y="111" width="17" height="35" rx="8.5" fill="#172B4D"/>
+    <rect x="366" y="111" width="17" height="35" rx="8.5" fill="#172B4D"/>
+    <rect x="394" y="112" width="17" height="34" rx="8.5" fill="#172B4D"/>
+    <rect x="422" y="116" width="17" height="32" rx="8.5" fill="#172B4D"/>
+
+    <!-- 눈 왼쪽 -->
+    <ellipse cx="155" cy="146" rx="24" ry="30" fill="white"/>
+    <ellipse cx="158" cy="150" rx="13" ry="18" fill="#172B4D"/>
+    <circle cx="162" cy="143" r="5" fill="white"/>
+
+    <!-- 눈 오른쪽 -->
+    <ellipse cx="215" cy="146" rx="24" ry="30" fill="white"/>
+    <ellipse cx="218" cy="150" rx="13" ry="18" fill="#172B4D"/>
+    <circle cx="222" cy="143" r="5" fill="white"/>
+
+    <!-- 눈썹 -->
+    <path
+      d="M138 116 Q153 106 168 115"
+      stroke="#172B4D"
+      stroke-width="7"
+      stroke-linecap="round"
+    />
+    <path
+      d="M198 115 Q213 106 228 116"
+      stroke="#172B4D"
+      stroke-width="7"
+      stroke-linecap="round"
+    />
+
+    <!-- 볼 -->
+    <ellipse cx="130" cy="174" rx="15" ry="9" fill="#FF7777"/>
+    <ellipse cx="240" cy="174" rx="15" ry="9" fill="#FF7777"/>
+
+    <!-- 웃는 입 -->
+    <path
+      d="M170 166
+         Q190 193 215 166
+         Q207 201 190 201
+         Q176 199 170 166Z"
+      fill="#7F1D1D"
+    />
+
+    <!-- 혀 -->
+    <ellipse cx="192" cy="191" rx="12" ry="6" fill="#FF7777"/>
+
+    <!-- 왼쪽 날개 -->
+    <path
+      d="M275 202
+         C220 210 155 225 92 247
+         C70 254 57 247 66 232
+         C87 198 142 181 245 177Z"
+      fill="white"
+      stroke="#D5DEE8"
+      stroke-width="4"
+    />
+
+    <!-- 오른쪽 날개 -->
+    <path
+      d="M300 200
+         C370 202 445 211 518 225
+         C535 229 540 239 525 244
+         C460 251 384 242 310 224Z"
+      fill="white"
+      stroke="#D5DEE8"
+      stroke-width="4"
+    />
+
+    <!-- 왼쪽 엔진 -->
+    <ellipse cx="105" cy="239" rx="42" ry="37" fill="#0F4C81"/>
+    <ellipse cx="105" cy="239" rx="30" ry="30" fill="#CBD5E1"/>
+    <ellipse cx="105" cy="239" rx="24" ry="24" fill="#172B4D"/>
+
+    <!-- 왼쪽 엔진 팬 -->
+    <path
+      d="M105 216 L111 237 L126 229
+         M128 245 L108 242 L116 260
+         M99 263 L101 242 L84 251
+         M81 233 L101 237 L94 218"
+      stroke="#64748B"
+      stroke-width="5"
+      stroke-linecap="round"
+    />
+    <circle cx="105" cy="239" r="5" fill="#CBD5E1"/>
+
+    <!-- 오른쪽 엔진 -->
+    <ellipse cx="315" cy="245" rx="42" ry="37" fill="#0F4C81"/>
+    <ellipse cx="315" cy="245" rx="30" ry="30" fill="#CBD5E1"/>
+    <ellipse cx="315" cy="245" rx="24" ry="24" fill="#172B4D"/>
+
+    <!-- 오른쪽 엔진 팬 -->
+    <path
+      d="M315 222 L321 243 L336 235
+         M338 251 L318 248 L326 266
+         M309 269 L311 248 L294 257
+         M291 239 L311 243 L304 224"
+      stroke="#64748B"
+      stroke-width="5"
+      stroke-linecap="round"
+    />
+    <circle cx="315" cy="245" r="5" fill="#CBD5E1"/>
+
+    <!-- 오른팔 -->
+    <path
+      d="M405 190
+         C420 180 438 185 446 198
+         L453 211"
+      stroke="#0F4C81"
+      stroke-width="16"
+      stroke-linecap="round"
+    />
+
+    <!-- 오른손 -->
+    <circle cx="451" cy="213" r="15" fill="white" stroke="#D5DEE8" stroke-width="3"/>
+
+    <!-- 왼팔 -->
+    <path
+      d="M87 156
+         C55 145 43 123 39 101"
+      stroke="#0F4C81"
+      stroke-width="16"
+      stroke-linecap="round"
+    />
+
+    <!-- 왼손 -->
+    <circle cx="37" cy="91" r="17" fill="white" stroke="#D5DEE8" stroke-width="3"/>
+
+    <!-- 손가락 -->
+    <path
+      d="M25 82 L20 70
+         M34 78 L31 64
+         M43 79 L46 65
+         M50 85 L57 73"
+      stroke="white"
+      stroke-width="8"
+      stroke-linecap="round"
+    />
+
+    <!-- WIDE SHIPPING -->
+    <text
+      x="285"
+      y="177"
+      fill="#0F4C81"
+      font-size="20"
+      font-weight="800"
+      font-family="Arial, sans-serif"
+    >
+      WIDE SHIPPING
+    </text>
+
+    <!-- 앞부분 -->
+    <path
+      d="M478 180
+         C505 179 525 181 538 187
+         C525 194 505 196 480 194Z"
+      fill="#E2E8F0"
+    />
+
+    <!-- 바닥 그림자 -->
+    <ellipse
+      cx="285"
+      cy="286"
+      rx="190"
+      ry="12"
+      fill="#CBD5E1"
+      opacity=".35"
+    />
   </svg>
 </span>
 
