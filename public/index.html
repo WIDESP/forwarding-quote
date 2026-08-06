@@ -173,7 +173,7 @@
     <!-- 헤더 타이틀 영역 (좌: 비행기 캐릭터 / 우: 컨테이너 캐릭터) -->
     <div class="header-group">
       <div class="header-title-wrapper">
-        <!-- [왼쪽] 비행기 캐릭터 SVG -->
+        <!-- [왼쪽] 비행기 캐릭터 SVG (하단 파란선 입 안 닿게 수정됨) -->
         <span class="char-icon char-left">
           <div class="airplane-character" aria-label="WIDE SHIPPING airplane">
             <svg
@@ -244,13 +244,13 @@
                 stroke-width="2.5"
               />
 
-              <!-- 하단 파란 몸체 -->
+              <!-- 하단 파란 몸체 (입을 가리지 않도록 좌표 조정) -->
               <path
                 d="M73 124
                    C102 145 151 151 205 150
-                   C261 149 306 138 329 120
-                   C322 142 296 155 258 162
-                   C207 171 143 166 105 153
+                   C261 149 290 144 300 135
+                   C295 150 270 160 240 164
+                   C190 170 143 166 105 153
                    C86 146 76 136 73 124 Z"
                 fill="url(#blueGradient)"
               />
