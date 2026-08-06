@@ -59,7 +59,7 @@
   }
   input:focus, select:focus, textarea:focus { border-color: var(--border-focus); box-shadow: 0 0 0 3px rgba(15,76,129,0.12); }
   
-  /* CBM 자동 계산 박스 및 행 추가 버튼 */
+  /* CBM / Volume Weight 계산 박스 및 행 추가 버튼 */
   .cbm-box { background: #F8FAFC; border: 1.5px dashed #CBD5E1; border-radius: 12px; padding: 20px; margin-top: 12px; }
   .cbm-row { display: grid; grid-template-columns: repeat(4, 1fr) 40px; gap: 8px; margin-bottom: 8px; align-items: end; }
   
@@ -178,7 +178,7 @@
         </select>
       </div>
       
-      <!-- LCL / 항공 조건 시 CBM 자동 계산 박스 -->
+      <!-- LCL / 항공 조건 시 규격 계산 박스 -->
       <div id="lcl-spec" class="full" style="display:none;">
         <div class="cbm-box">
           <label style="color:#0F4C81; margin-bottom:12px; display:block;">📏 화물 사이즈 직접 입력 (다중 규격 추가 가능)</label>
@@ -197,7 +197,8 @@
 
           <div class="grid" style="margin-top: 16px;">
             <div class="form-group">
-              <label>총 부피 (합산 CBM)</label>
+              <!-- 모드(해상/항공)에 따라 dynamic 변경되는 라벨 -->
+              <label id="lbl_volume">총 부피 (합산 CBM)</label>
               <input id="cbm" type="number" step="0.001" placeholder="0.000" readonly style="background:#F1F5F9; font-weight:700; color:var(--primary);">
             </div>
             <div class="form-group">
@@ -238,7 +239,6 @@
   })();
 
   // 2. Supabase 클라이언트 초기화
-  // (Vercel 환경변수 / JS 환경변수로 설정된 Supabase 정보)
   const SUPABASE_URL = window.ENV_SUPABASE_URL || 'https://YOUR_SUPABASE_PROJECT_ID.supabase.co';
   const SUPABASE_ANON_KEY = window.ENV_SUPABASE_ANON_KEY || 'YOUR_SUPABASE_ANON_KEY';
   
@@ -304,10 +304,11 @@
     calcCbm();
   }
 
-  // 5. 합산 CBM 실시간 계산 logic
+  // 5. 부피(CBM) 및 항공 Volume Weight 실시간 계산 logic
   function calcCbm() {
     const rows = document.querySelectorAll('.cbm-row');
-    let totalCbm = 0;
+    const isAir = document.getElementById('m_air').checked;
+    let totalResult = 0;
 
     rows.forEach(row => {
       const w = Number(row.querySelector('.dim_w').value) || 0;
@@ -315,20 +316,38 @@
       const h = Number(row.querySelector('.dim_h').value) || 0;
       const q = Number(row.querySelector('.dim_q').value) || 1;
       
-      totalCbm += (w * l * h * q) / 1000000;
+      if (isAir) {
+        // 항공 부피 중량 (Volume Weight, kg) = (가로cm * 세로cm * 높이cm * 수량) / 6000
+        totalResult += (w * l * h * q) / 6000;
+      } else {
+        // 해상 CBM = (가로cm * 세로cm * 높이cm * 수량) / 1000000
+        totalResult += (w * l * h * q) / 1000000;
+      }
     });
 
-    document.getElementById('cbm').value = totalCbm > 0 ? totalCbm.toFixed(3) : '';
+    document.getElementById('cbm').value = totalResult > 0 ? totalResult.toFixed(isAir ? 2 : 3) : '';
   }
 
-  // 6. 운송 방식에 따른 UI 전환
+  // 6. 운송 방식 변경 시 UI 및 라벨 자동 전환
   function toggleMode() {
     const isFcl = document.getElementById('m_fcl').checked;
+    const isAir = document.getElementById('m_air').checked;
+    
     document.getElementById('fcl-spec').style.display = isFcl ? 'flex' : 'none';
     document.getElementById('lcl-spec').style.display = isFcl ? 'none' : 'block';
+
+    // 항공일 때 라벨을 Volume Weight로 변경
+    const lblVolume = document.getElementById('lbl_volume');
+    if (isAir) {
+      lblVolume.innerText = 'Volume Weight (부피중량, kg)';
+    } else {
+      lblVolume.innerText = '총 부피 (합산 CBM)';
+    }
+
+    calcCbm(); // 모드 전환 시 계산식 즉시 재적용
   }
 
-  // 7. 견적 문의 제출 (Supabase DB 저장 + EmailJS 메일 발송 동시 실행)
+  // 7. 견적 문의 제출
   async function submitQuote() {
     const btnSubmit = document.getElementById('btnSubmit');
     btnSubmit.disabled = true;
@@ -336,6 +355,7 @@
 
     const selectedMode = document.querySelector('input[name="mode"]:checked').value;
     const isFcl = document.getElementById('m_fcl').checked;
+    const isAir = document.getElementById('m_air').checked;
     const fclTypeValue = isFcl ? document.getElementById('fcl_type').value : '해당없음(LCL/Air)';
 
     // 규격 정보 조합
@@ -358,9 +378,11 @@
     const cbmVal = document.getElementById('cbm') ? (document.getElementById('cbm').value || '0') : '0';
     const weightVal = document.getElementById('weight') ? (document.getElementById('weight').value || '0') : '0';
 
+    // 메일 및 DB 수신 문자열
+    const volText = isAir ? `${cbmVal} Vol.kg` : `${cbmVal} CBM`;
     const lclAirInfo = isFcl 
       ? '해당없음(FCL)' 
-      : `${cbmVal} CBM / ${weightVal} kg / ${dimensionsFormatted}`;
+      : `${volText} / ${weightVal} kg / ${dimensionsFormatted}`;
 
     const quoteData = {
       company: document.getElementById('company').value,
@@ -381,7 +403,6 @@
     };
 
     try {
-      // A. Supabase DB 저장
       if (supabaseClient) {
         const { error } = await supabaseClient
           .from('quotes')
@@ -392,7 +413,6 @@
         }
       }
 
-      // B. EmailJS 메일 전송
       await emailjs.send('service_0941k49', 'template_07n0vdn', quoteData);
 
       alert('견적 문의가 정상 접수되었습니다.');
