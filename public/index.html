@@ -178,19 +178,18 @@
         </select>
       </div>
       
-      <!-- LCL / 항공 조건 시 동적 CBM 계산 박스 -->
+      <!-- LCL / 항공 조건 시 CBM 자동 계산 박스 -->
       <div id="lcl-spec" class="full" style="display:none;">
         <div class="cbm-box">
           <label style="color:#0F4C81; margin-bottom:12px; display:block;">📏 화물 사이즈 직접 입력 (다중 규격 추가 가능)</label>
           
-          <!-- 화물 규격 행 컨테이너 -->
           <div id="dim-container">
             <div class="cbm-row">
               <div class="form-group"><label>가로(cm)</label><input class="dim_w" type="number" placeholder="100" oninput="calcCbm()"></div>
               <div class="form-group"><label>세로(cm)</label><input class="dim_l" type="number" placeholder="100" oninput="calcCbm()"></div>
               <div class="form-group"><label>높이(cm)</label><input class="dim_h" type="number" placeholder="100" oninput="calcCbm()"></div>
               <div class="form-group"><label>수량(EA)</label><input class="dim_q" type="number" value="1" oninput="calcCbm()"></div>
-              <div></div> <!-- 첫 행 삭제버튼 공백 -->
+              <div></div>
             </div>
           </div>
 
@@ -223,12 +222,14 @@
       </div>
     </div>
 
-    <button type="submit" class="btn-submit">견적 문의 접수하기</button>
+    <button type="submit" id="btnSubmit" class="btn-submit">견적 문의 접수하기</button>
   </form>
 </div>
 
 <!-- EmailJS SDK 연동 -->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<!-- Supabase SDK 연동 -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script type="text/javascript">
   // 1. EmailJS 초기화
@@ -236,7 +237,17 @@
     emailjs.init("AZNplwsjRX-VEjTqg");
   })();
 
-  // 2. 주요 포트 데이터 및 자동완성
+  // 2. Supabase 클라이언트 초기화
+  // (Vercel 환경변수 / JS 환경변수로 설정된 Supabase 정보)
+  const SUPABASE_URL = window.ENV_SUPABASE_URL || 'https://YOUR_SUPABASE_PROJECT_ID.supabase.co';
+  const SUPABASE_ANON_KEY = window.ENV_SUPABASE_ANON_KEY || 'YOUR_SUPABASE_ANON_KEY';
+  
+  let supabaseClient = null;
+  if (typeof supabase !== 'undefined' && SUPABASE_URL.includes('supabase.co')) {
+    supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  }
+
+  // 3. 주요 포트 데이터 및 자동완성
   const PORTS = [
     { code: 'KRPUS', name: 'Busan', country: 'Korea' },
     { code: 'KRINC', name: 'Incheon', country: 'Korea' },
@@ -273,7 +284,7 @@
   setupAutocomplete('origin', 'origin-list');
   setupAutocomplete('dest', 'dest-list');
 
-  // 3. 다중 화물 행 추가 / 삭제
+  // 4. 다중 화물 행 추가 / 삭제
   function addDimRow() {
     const container = document.getElementById('dim-container');
     const newRow = document.createElement('div');
@@ -293,7 +304,7 @@
     calcCbm();
   }
 
-  // 4. 합산 CBM 실시간 계산 logic
+  // 5. 합산 CBM 실시간 계산 logic
   function calcCbm() {
     const rows = document.querySelectorAll('.cbm-row');
     let totalCbm = 0;
@@ -310,21 +321,24 @@
     document.getElementById('cbm').value = totalCbm > 0 ? totalCbm.toFixed(3) : '';
   }
 
-  // 5. 운송 방식에 따른 UI 전환
+  // 6. 운송 방식에 따른 UI 전환
   function toggleMode() {
     const isFcl = document.getElementById('m_fcl').checked;
     document.getElementById('fcl-spec').style.display = isFcl ? 'flex' : 'none';
     document.getElementById('lcl-spec').style.display = isFcl ? 'none' : 'block';
   }
 
-  // 6. 견적 문의 제출 및 EmailJS 이메일 발송
+  // 7. 견적 문의 제출 (Supabase DB 저장 + EmailJS 메일 발송 동시 실행)
   async function submitQuote() {
+    const btnSubmit = document.getElementById('btnSubmit');
+    btnSubmit.disabled = true;
+    btnSubmit.innerText = '접수 중...';
+
     const selectedMode = document.querySelector('input[name="mode"]:checked').value;
     const isFcl = document.getElementById('m_fcl').checked;
-
     const fclTypeValue = isFcl ? document.getElementById('fcl_type').value : '해당없음(LCL/Air)';
 
-    // 여러 규격 정보 텍스트로 합치기 logic
+    // 규격 정보 조합
     let dimList = [];
     if (!isFcl) {
       const rows = document.querySelectorAll('.cbm-row');
@@ -344,12 +358,11 @@
     const cbmVal = document.getElementById('cbm') ? (document.getElementById('cbm').value || '0') : '0';
     const weightVal = document.getElementById('weight') ? (document.getElementById('weight').value || '0') : '0';
 
-    // 메일 전송용 최종 문구 생성
     const lclAirInfo = isFcl 
       ? '해당없음(FCL)' 
       : `${cbmVal} CBM / ${weightVal} kg / ${dimensionsFormatted}`;
 
-    const templateParams = {
+    const quoteData = {
       company: document.getElementById('company').value,
       name: document.getElementById('name').value,
       phone: document.getElementById('phone').value,
@@ -368,14 +381,28 @@
     };
 
     try {
-      await emailjs.send('service_0941k49', 'template_07n0vdn', templateParams);
+      // A. Supabase DB 저장
+      if (supabaseClient) {
+        const { error } = await supabaseClient
+          .from('quotes')
+          .insert([quoteData]);
+
+        if (error) {
+          console.error('Supabase 저장 에러:', error);
+        }
+      }
+
+      // B. EmailJS 메일 전송
+      await emailjs.send('service_0941k49', 'template_07n0vdn', quoteData);
 
       alert('견적 문의가 정상 접수되었습니다.');
       location.reload();
-      
+
     } catch (error) {
-      console.error('이메일 발송 실패:', error);
-      alert('견적 접수 중 오류가 발생했습니다.');
+      console.error('견적 접수 처리 실패:', error);
+      alert('견적 접수 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.');
+      btnSubmit.disabled = false;
+      btnSubmit.innerText = '견적 문의 접수하기';
     }
   }
 </script>
