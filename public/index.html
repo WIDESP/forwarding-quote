@@ -49,9 +49,6 @@
 
   .char-left {
     animation-delay: 0s;
-    font-size: 38px;
-    line-height: 1;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.08));
   }
 
   .char-right {
@@ -173,11 +170,39 @@
   </div>
 
   <form id="quoteForm" class="card" onsubmit="event.preventDefault(); submitQuote();">
-    <!-- 헤더 타이틀 영역 (좌: 고래 이모지 / 우: 하늘색 컨테이너 캐릭터) -->
+    <!-- 헤더 타이틀 영역 (좌/우 모두 와이드해운 캐릭터 배치) -->
     <div class="header-group">
       <div class="header-title-wrapper">
-        <!-- [왼쪽] 고래 이모지 -->
-        <span class="char-icon char-left">🐳</span>
+        <!-- [왼쪽] WIDE SHIPPING 문구가 들어간 비행기 캐릭터 -->
+        <span class="char-icon char-left">
+          <svg width="110" height="60" viewBox="0 0 160 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- 비행기 꼬리 날개 -->
+            <path d="M 24 36 L 14 18 L 30 26 Z" fill="#0284C7"/>
+            <!-- 비행기 몸체 (하늘색 계열) -->
+            <path d="M 14 50 Q 14 38 30 38 L 130 38 Q 150 38 150 50 Q 150 62 130 62 L 30 62 Q 14 62 14 50 Z" fill="#38BDF8" stroke="#0284C7" stroke-width="2.5"/>
+            <!-- 비행기 기수 (앞부분 둥근 모양) -->
+            <path d="M 130 38 Q 150 38 150 50 Q 150 62 130 62 Z" fill="#38BDF8" stroke="#0284C7" stroke-width="2.5"/>
+            <!-- 비행기 날개 -->
+            <path d="M 70 50 L 50 78 L 70 78 L 95 50 Z" fill="#0EA5E9" stroke="#0284C7" stroke-width="2"/>
+            <!-- 엔진 -->
+            <rect x="68" y="72" width="14" height="8" rx="3" fill="#0284C7"/>
+            <!-- 창문 (조종석 및 객실 창) -->
+            <circle cx="134" cy="46" r="3" fill="#FFFFFF"/>
+            <circle cx="120" cy="46" r="2.2" fill="#FFFFFF"/>
+            <circle cx="108" cy="46" r="2.2" fill="#FFFFFF"/>
+            <circle cx="96" cy="46" r="2.2" fill="#FFFFFF"/>
+            <circle cx="84" cy="46" r="2.2" fill="#FFFFFF"/>
+            <circle cx="72" cy="46" r="2.2" fill="#FFFFFF"/>
+            <circle cx="60" cy="46" r="2.2" fill="#FFFFFF"/>
+            
+            <!-- WIDE SHIPPING 텍스트 레터링 -->
+            <text x="36" y="53" fill="#FFFFFF" font-size="9" font-weight="900" font-family="sans-serif" letter-spacing="0.2">WIDE</text>
+
+            <!-- 얼굴 (조종석 창문 부근 위쪽 또는 앞쪽에 귀여운 표정) -->
+            <circle cx="138" cy="44" r="2" fill="#0F172A"/>
+            <ellipse cx="140" cy="51" rx="2" ry="1.2" fill="#F43F5E" opacity="0.7"/>
+          </svg>
+        </span>
 
         <h1>국제운송 견적 문의</h1>
 
