@@ -34,7 +34,7 @@
   .section-title { font-size: 16px; font-weight: 700; color: #0F172A; margin: 28px 0 16px; display: flex; align-items: center; gap: 8px; }
   .section-title::before { content: ''; display: inline-block; width: 4px; height: 16px; background: var(--primary); border-radius: 2px; }
 
-  /* 운송 수단 버튼 스타일 UI */
+  /* Segment Control (운송수단) */
   .segment-control { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
   .segment-control input { display: none; }
   .segment-control label {
@@ -44,6 +44,17 @@
   }
   .segment-control input:checked + label {
     border-color: var(--primary); background: #F0F6FF; color: var(--primary); font-weight: 700; box-shadow: 0 2px 8px rgba(15,76,129,0.12);
+  }
+
+  /* 컨테이너 타입 그리드 선택 버튼 */
+  .type-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 8px; }
+  .type-grid input { display: none; }
+  .type-grid label {
+    text-align: center; padding: 12px 8px; border: 1.5px solid var(--border); border-radius: 10px;
+    cursor: pointer; font-size: 13px; font-weight: 600; color: #475569; background: #FFF; transition: all 0.2s;
+  }
+  .type-grid input:checked + label {
+    border-color: var(--primary); background: #F0F6FF; color: var(--primary); font-weight: 700;
   }
 
   /* 2열 레이아웃 그리드 */
@@ -94,6 +105,7 @@
 
   @media (max-width: 640px) {
     .grid { grid-template-columns: 1fr; }
+    .type-grid { grid-template-columns: repeat(2, 1fr); }
     .cbm-row { grid-template-columns: repeat(2, 1fr); position: relative; padding-bottom: 40px; border-bottom: 1px solid #E2E8F0; }
     .btn-del-row { position: absolute; right: 0; bottom: 8px; width: 100%; height: 32px; font-size: 13px; }
     .card { padding: 24px 18px; }
@@ -163,23 +175,43 @@
     <!-- 3. 화물 정보 -->
     <div class="section-title">화물 정보</div>
     <div class="grid">
-      <div class="form-group">
+      <div class="form-group full">
         <label>품목명 (Cargo Description) *</label>
         <input id="cargo" placeholder="예: 전자부품, 일반공업제품" required>
       </div>
 
-      <!-- FCL 조건 시 선택 -->
-      <div id="fcl-spec" class="form-group">
-        <label>컨테이너 규격 및 수량 *</label>
-        <select id="fcl_type">
-          <option value="20ft Dry x 1">20ft Dry x 1</option>
-          <option value="40ft Dry x 1">40ft Dry x 1</option>
-          <option value="40ft High Cube x 1">40ft High Cube x 1</option>
-        </select>
+      <!-- FCL 전용 컨테이너 타입 선택 버튼들 -->
+      <div id="fcl-type-box" class="form-group full">
+        <label>컨테이너 타입 선택 *</label>
+        <div class="type-grid">
+          <input type="radio" id="c_20dc" name="container_type" value="20DC" checked onchange="toggleContainerDim()">
+          <label for="c_20dc">20DC</label>
+
+          <input type="radio" id="c_40hq" name="container_type" value="40HQ" onchange="toggleContainerDim()">
+          <label for="c_40hq">40HQ</label>
+
+          <input type="radio" id="c_ot" name="container_type" value="20OT / 40OT" onchange="toggleContainerDim()">
+          <label for="c_ot">20OT / 40OT</label>
+
+          <input type="radio" id="c_fr" name="container_type" value="20FR / 40FR" onchange="toggleContainerDim()">
+          <label for="c_fr">20FR / 40FR</label>
+
+          <input type="radio" id="c_bulk" name="container_type" value="BULK" onchange="toggleContainerDim()">
+          <label for="c_bulk">BULK</label>
+
+          <input type="radio" id="c_unk" name="container_type" value="컨테이너 타입 미정" onchange="toggleContainerDim()">
+          <label for="c_unk">타입 미정</label>
+        </div>
       </div>
-      
-      <!-- LCL / 항공 조건 시 규격 계산 박스 -->
-      <div id="lcl-spec" class="full" style="display:none;">
+
+      <!-- 공통 중량 입력란 -->
+      <div class="form-group full">
+        <label>총 중량 (Gross Weight, kg) *</label>
+        <input id="weight" type="number" placeholder="예: 5000" required>
+      </div>
+
+      <!-- LCL, Air 및 OT/FR/BULK/미정 선택 시 나타나는 화물 사이즈(가로/세로/높이) 입력 박스 -->
+      <div id="dim-spec-box" class="full" style="display:none;">
         <div class="cbm-box">
           <label style="color:#0F4C81; margin-bottom:12px; display:block;">📏 화물 사이즈 직접 입력 (다중 규격 추가 가능)</label>
           
@@ -195,15 +227,10 @@
 
           <button type="button" class="btn-add-row" onclick="addDimRow()">+ 화물 규격 추가</button>
 
-          <div class="grid" style="margin-top: 16px;">
+          <div style="margin-top: 16px;">
             <div class="form-group">
-              <!-- 모드(해상/항공)에 따라 dynamic 변경되는 라벨 -->
               <label id="lbl_volume">총 부피 (합산 CBM)</label>
               <input id="cbm" type="number" step="0.001" placeholder="0.000" readonly style="background:#F1F5F9; font-weight:700; color:var(--primary);">
-            </div>
-            <div class="form-group">
-              <label>총 중량 (Gross Weight, kg)</label>
-              <input id="weight" type="number" placeholder="0">
             </div>
           </div>
         </div>
@@ -317,10 +344,8 @@
       const q = Number(row.querySelector('.dim_q').value) || 1;
       
       if (isAir) {
-        // 항공 부피 중량 (Volume Weight, kg) = (가로cm * 세로cm * 높이cm * 수량) / 6000
         totalResult += (w * l * h * q) / 6000;
       } else {
-        // 해상 CBM = (가로cm * 세로cm * 높이cm * 수량) / 1000000
         totalResult += (w * l * h * q) / 1000000;
       }
     });
@@ -328,15 +353,14 @@
     document.getElementById('cbm').value = totalResult > 0 ? totalResult.toFixed(isAir ? 2 : 3) : '';
   }
 
-  // 6. 운송 방식 변경 시 UI 및 라벨 자동 전환
+  // 6. 운송 방식 변경 시 UI 전환
   function toggleMode() {
     const isFcl = document.getElementById('m_fcl').checked;
     const isAir = document.getElementById('m_air').checked;
     
-    document.getElementById('fcl-spec').style.display = isFcl ? 'flex' : 'none';
-    document.getElementById('lcl-spec').style.display = isFcl ? 'none' : 'block';
+    document.getElementById('fcl-type-box').style.display = isFcl ? 'block' : 'none';
 
-    // 항공일 때 라벨을 Volume Weight로 변경
+    // 항공 / 해상 LCL 일 때 부피 중량 및 CBM 라벨 처리
     const lblVolume = document.getElementById('lbl_volume');
     if (isAir) {
       lblVolume.innerText = 'Volume Weight (부피중량, kg)';
@@ -344,7 +368,29 @@
       lblVolume.innerText = '총 부피 (합산 CBM)';
     }
 
-    calcCbm(); // 모드 전환 시 계산식 즉시 재적용
+    toggleContainerDim();
+  }
+
+  // 컨테이너 타입별 사이즈 입력 박스 노출 여부 결정
+  function toggleContainerDim() {
+    const isFcl = document.getElementById('m_fcl').checked;
+    const dimBox = document.getElementById('dim-spec-box');
+
+    if (!isFcl) {
+      // LCL 또는 항공인 경우 무조건 사이즈 입력창 표시
+      dimBox.style.display = 'block';
+    } else {
+      // FCL인 경우 특수화물/미정 옵션(OT/FR/BULK/미정) 클릭 시에만 입력창 표시
+      const selectedType = document.querySelector('input[name="container_type"]:checked')?.value;
+      const needDimTypes = ['20OT / 40OT', '20FR / 40FR', 'BULK', '컨테이너 타입 미정'];
+      
+      if (needDimTypes.includes(selectedType)) {
+        dimBox.style.display = 'block';
+      } else {
+        dimBox.style.display = 'none';
+      }
+    }
+    calcCbm();
   }
 
   // 7. 견적 문의 제출
@@ -356,33 +402,30 @@
     const selectedMode = document.querySelector('input[name="mode"]:checked').value;
     const isFcl = document.getElementById('m_fcl').checked;
     const isAir = document.getElementById('m_air').checked;
-    const fclTypeValue = isFcl ? document.getElementById('fcl_type').value : '해당없음(LCL/Air)';
+    
+    const selectedContainerType = isFcl 
+      ? (document.querySelector('input[name="container_type"]:checked')?.value || '20DC')
+      : '해당없음(LCL/Air)';
 
-    // 규격 정보 조합
     let dimList = [];
-    if (!isFcl) {
-      const rows = document.querySelectorAll('.cbm-row');
-      rows.forEach(row => {
-        const w = row.querySelector('.dim_w').value;
-        const l = row.querySelector('.dim_l').value;
-        const h = row.querySelector('.dim_h').value;
-        const q = row.querySelector('.dim_q').value || '1';
+    const rows = document.querySelectorAll('.cbm-row');
+    rows.forEach(row => {
+      const w = row.querySelector('.dim_w').value;
+      const l = row.querySelector('.dim_l').value;
+      const h = row.querySelector('.dim_h').value;
+      const q = row.querySelector('.dim_q').value || '1';
 
-        if (w && l && h) {
-          dimList.push(`${w}*${l}*${h}cm (${q}EA)`);
-        }
-      });
-    }
+      if (w && l && h) {
+        dimList.push(`${w}*${l}*${h}cm (${q}EA)`);
+      }
+    });
 
     const dimensionsFormatted = dimList.length > 0 ? dimList.join(', ') : '미입력';
     const cbmVal = document.getElementById('cbm') ? (document.getElementById('cbm').value || '0') : '0';
     const weightVal = document.getElementById('weight') ? (document.getElementById('weight').value || '0') : '0';
 
-    // 메일 및 DB 수신 문자열
     const volText = isAir ? `${cbmVal} Vol.kg` : `${cbmVal} CBM`;
-    const lclAirInfo = isFcl 
-      ? '해당없음(FCL)' 
-      : `${volText} / ${weightVal} kg / ${dimensionsFormatted}`;
+    const lclAirInfo = `${volText} / ${weightVal} kg / ${dimensionsFormatted}`;
 
     const quoteData = {
       company: document.getElementById('company').value,
@@ -394,7 +437,7 @@
       dest: document.getElementById('dest').value,
       inc: document.getElementById('inc').value,
       cargo: document.getElementById('cargo').value,
-      fcl_type: fclTypeValue,
+      fcl_type: selectedContainerType,
       dimensions: dimensionsFormatted,
       cbm: cbmVal,
       weight: weightVal,
