@@ -173,7 +173,7 @@
     <!-- 헤더 타이틀 영역 (좌: 비행기 캐릭터 / 우: 컨테이너 캐릭터) -->
     <div class="header-group">
       <div class="header-title-wrapper">
-        <!-- [왼쪽] 비행기 캐릭터 SVG (뒤쪽 작은 날개 제거 & 하단 라인 수평 커브 적용 & 앞날개 유지) -->
+        <!-- [왼쪽] 비행기 캐릭터 SVG -->
         <span class="char-icon char-left">
           <div class="airplane-character" aria-label="WIDE SHIPPING airplane">
             <svg
@@ -184,16 +184,23 @@
               role="img"
             >
               <defs>
-                <!-- 몸체 -->
+                <!-- 몸체 그라데이션 -->
                 <linearGradient id="bodyGradient" x1="0" y1="0" x2="1" y2="1">
                   <stop offset="0%" stop-color="#FFFFFF"/>
-                  <stop offset="100%" stop-color="#F4FAFF"/>
+                  <stop offset="100%" stop-color="#FFF5F7"/>
                 </linearGradient>
 
-                <!-- WIDE SHIPPING 블루 -->
-                <linearGradient id="blueGradient" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stop-color="#38BDF8"/>
-                  <stop offset="100%" stop-color="#0891D1"/>
+                <!-- 꼬리/포인트 핑크 그라데이션 -->
+                <linearGradient id="pinkGradient" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#FFB7C5"/>
+                  <stop offset="100%" stop-color="#F472B6"/>
+                </linearGradient>
+
+                <!-- 3D 리본용 입체 그라데이션 -->
+                <linearGradient id="ribbonGradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#FFE4E6"/>
+                  <stop offset="50%" stop-color="#FFB7C5"/>
+                  <stop offset="100%" stop-color="#F472B6"/>
                 </linearGradient>
               </defs>
 
@@ -204,7 +211,7 @@
                    C103 19 118 20 126 28
                    L155 75
                    L101 96 Z"
-                fill="url(#blueGradient)"
+                fill="url(#pinkGradient)"
               />
 
               <!-- W -->
@@ -231,26 +238,56 @@
                    C93 144 75 130 71 116
                    C70 112 71 109 73 106 Z"
                 fill="url(#bodyGradient)"
-                stroke="#BAE6FD"
+                stroke="#FFD1DC"
                 stroke-width="2.5"
               />
 
-              <!-- 하단 파란색 라인 (그리신 하늘색 선처럼 입 아래로 흐르도록 완만하게 연결) -->
+              <!-- 하단 핑크 라인 -->
               <path
                 d="M73 138
                    Q 190 180 300 138
                    Q 200 158 73 138 Z"
-                fill="url(#blueGradient)"
+                fill="url(#pinkGradient)"
               />
 
-              <!-- 앞쪽 메인 날개 (복구완료) -->
+              <!-- 앞쪽 메인 날개 -->
               <path
                 d="M60 126
                    C60 120 100 122 155 125
                    C140 138 100 142 65 136
                    C58 134 58 128 60 126 Z"
-                fill="url(#blueGradient)"
+                fill="url(#pinkGradient)"
               />
+
+              <!-- ========================================== -->
+              <!-- 고퀄리티 리본 (위치 미세 조정: 아래로 살짝 내림) -->
+              <!-- ========================================== -->
+              <g transform="translate(142, 60) rotate(-12) scale(0.85)">
+                <!-- 1. 리본 배경 흰색 테두리 -->
+                <g stroke="#FFFFFF" stroke-width="7" stroke-linejoin="round" fill="none" opacity="0.9">
+                  <path d="M -5 0 C -25 -15, -40 0, -30 18 C -20 30, -5 20, -5 5 Z" />
+                  <path d="M 5 0 C 25 -15, 40 0, 30 18 C 20 30, 5 20, 5 5 Z" />
+                  <ellipse cx="0" cy="8" rx="7" ry="11" />
+                </g>
+                
+                <!-- 2. 왼쪽 리본 루프 & 하이라이트 -->
+                <path d="M -5 0 C -25 -15, -40 0, -30 18 C -20 30, -5 20, -5 5 Z" 
+                      fill="url(#ribbonGradient)" stroke="#F472B6" stroke-width="1.5"/>
+                <path d="M -26 2 C -32 5, -31 11, -26 15" 
+                      fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+
+                <!-- 3. 오른쪽 리본 루프 & 하이라이트 -->
+                <path d="M 5 0 C 25 -15, 40 0, 30 18 C 20 30, 5 20, 5 5 Z" 
+                      fill="url(#ribbonGradient)" stroke="#F472B6" stroke-width="1.5"/>
+                <path d="M 26 2 C 32 5, 31 11, 26 15" 
+                      fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+
+                <!-- 4. 중앙 매듭 & 주름 디테일 -->
+                <ellipse cx="0" cy="8" rx="7" ry="11" 
+                         fill="url(#ribbonGradient)" stroke="#F472B6" stroke-width="1.5"/>
+                <path d="M -2.5 4 L -2.5 12 M 2.5 4 L 2.5 12" 
+                      fill="none" stroke="#D946EF" stroke-width="1.2" opacity="0.5" stroke-linecap="round"/>
+              </g>
 
               <!-- 조종석 -->
               <path
@@ -259,21 +296,21 @@
                    C335 91 338 98 338 105
                    L273 105
                    C269 94 269 79 275 68 Z"
-                fill="#55BFF2"
+                fill="#FFD1DC"
               />
 
-              <!-- 조종석 반사 -->
+              <!-- 조종석 반사 광택 -->
               <path
                 d="M282 71
                    L291 72
                    L286 104
                    L277 104 Z"
-                fill="#BDEBFF"
+                fill="#FFE4E6"
                 opacity="0.9"
               />
 
               <!-- 창문 -->
-              <g fill="#0EA5E9">
+              <g fill="#F472B6">
                 <ellipse cx="155" cy="87" rx="7" ry="12"/>
                 <ellipse cx="177" cy="84" rx="7" ry="12"/>
                 <ellipse cx="199" cy="82" rx="7" ry="12"/>
@@ -281,11 +318,11 @@
                 <ellipse cx="243" cy="81" rx="7" ry="12"/>
               </g>
 
-              <!-- WIDE SHIPPING -->
+              <!-- WIDE SHIPPING 텍스트 -->
               <text
                 x="198"
                 y="124"
-                fill="#0798D6"
+                fill="#F472B6"
                 font-size="18"
                 font-weight="800"
                 font-family="Arial, Helvetica, sans-serif"
@@ -295,35 +332,23 @@
                 WIDE SHIPPING
               </text>
 
-              <!-- 얼굴 -->
-              <!-- 눈 -->
+              <!-- 얼굴 (눈) -->
               <ellipse cx="296" cy="114" rx="7" ry="9" fill="#111827"/>
               <ellipse cx="320" cy="114" rx="7" ry="9" fill="#111827"/>
+              
+              <!-- 속눈썹 -->
+              <path d="M290 105 Q296 100 302 105" stroke="#111827" stroke-width="2" fill="none"/>
+              <path d="M314 105 Q320 100 326 105" stroke="#111827" stroke-width="2" fill="none"/>
 
-              <!-- 눈 반짝임 -->
+              <!-- 눈 초롱초롱 빛 -->
               <circle cx="298" cy="111" r="2.5" fill="#FFFFFF"/>
               <circle cx="322" cy="111" r="2.5" fill="#FFFFFF"/>
 
               <!-- 볼터치 -->
-              <ellipse
-                cx="284"
-                cy="128"
-                rx="9"
-                ry="5"
-                fill="#FF7777"
-                opacity="0.85"
-              />
+              <ellipse cx="284" cy="128" rx="9" ry="5" fill="#FFB7C5" opacity="0.85"/>
+              <ellipse cx="331" cy="128" rx="9" ry="5" fill="#FFB7C5" opacity="0.85"/>
 
-              <ellipse
-                cx="331"
-                cy="128"
-                rx="9"
-                ry="5"
-                fill="#FF7777"
-                opacity="0.85"
-              />
-
-              <!-- 미소 -->
+              <!-- 입(미소) -->
               <path
                 d="M300 125
                    Q308 135 316 125"
